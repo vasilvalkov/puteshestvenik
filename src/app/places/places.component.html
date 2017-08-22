@@ -1,3 +1,5 @@
-<p>
-  places works!
-</p>
+<div class="row">
+  <div class="col-md-4" *ngFor="let place of places" >
+    <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.imageUrl"></app-place-thumbnail>
+  </div>
+</div>
