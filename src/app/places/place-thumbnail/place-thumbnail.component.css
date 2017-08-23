@@ -1,0 +1,11 @@
+.panel {
+    max-width: 300px;
+}
+
+.panel-body {
+    width: 280px;
+    height: 180px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
