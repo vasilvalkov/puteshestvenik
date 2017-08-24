@@ -1,3 +1,4 @@
+import { StarRatingComponent } from './../common/star-rating/star-rating.component';
 import { PlaceService } from './shared/place.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { PlaceDetailsComponent } from './place-details/place-details.component';
     declarations: [
         PlacesComponent,
         PlaceThumbnailComponent,
-        PlaceDetailsComponent
+        PlaceDetailsComponent,
+        StarRatingComponent
     ],
     providers: [
         PlaceService
