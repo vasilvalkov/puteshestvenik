@@ -1,10 +1,7 @@
-/* .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-} */
-
 app-place-thumbnail {
     display: inline-block;
+}
+
+app-place-thumbnail:hover {
+    cursor: pointer;
 }
