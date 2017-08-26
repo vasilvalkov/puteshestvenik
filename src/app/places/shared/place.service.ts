@@ -1,29 +1,32 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable, OnInit, OnChanges } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
+import { Place } from '../place.model';
+
 @Injectable()
-export class PlaceService{
-    places: FirebaseListObservable<any[]>;
-    item: any;
-    constructor(private db: AngularFireDatabase) { }
+export class PlaceService {
+    places: FirebaseListObservable<Place[]>;
+
+    constructor(private db: AngularFireDatabase) {}
 
     getPlaces() {
         return this.db.list('/places');
     }
 
-    getPlace(id: number) {
-        this.item = this.db.object('/places', { preserveSnapshot: true });
-        this.item.subscribe(snapshot => {
-          console.log(snapshot.key);
-          console.log(snapshot.val());
-        });
-        return PLACES.find(place => place.id === id);
+    getPlace(id: string) {
+        return this.db.object('/places/' + id);
+    }
+
+    savePlace(place: Place) {
+        const newPlaceThenableRef = this.db.list('/places').push(place);
+
+        return newPlaceThenableRef;
     }
 }
 
 const PLACES = [
     {
-        id: 1,
         heading: 'Рилски манастир',
         imageUrl: 'http://www.dinita-tours.com/files/148397219523128.jpg',
         rating: 4,
