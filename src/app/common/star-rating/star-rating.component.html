@@ -1,9 +1,8 @@
-<span class="crop" [style.width.px]="starWidth" [title]="rating">
+<span star [title]="rating">
     <span style="width: 86px">
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon" 
+            [class.glyphicon-star]="star <= rating" 
+            [class.glyphicon-star-empty]="star > rating" 
+            *ngFor="let star of stars"></span>
     </span>
 </span>

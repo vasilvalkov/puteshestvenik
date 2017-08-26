@@ -3,15 +3,18 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 @Component({
     selector: 'app-star-rating',
     templateUrl: './star-rating.component.html',
-    styles: ['.crop { overflow: hidden; }']
+    styles: ['[star] { color: #ff9800; }']
 })
 export class StarRatingComponent implements OnInit {
     @Input() rating: number;
-    starWidth: number;
+    @Input() topRating: number;
+    stars = [];
 
     constructor() { }
     ngOnInit() {
-        this.starWidth = this.rating * 86 / 5;
+        for (let index = 1; index <= this.topRating; index++) {
+            this.stars.push(index);
+        }
     }
 
 }
