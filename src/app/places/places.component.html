@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-3 pull-left" *ngFor="let place of places" >
+  <div class="col-sm-3 pull-left" *ngFor="let place of places | async" >
     <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.imageUrl"
       [routerLink]="['/places', place.id]"></app-place-thumbnail>
   </div>

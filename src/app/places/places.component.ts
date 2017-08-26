@@ -1,3 +1,4 @@
+import { FirebaseListObservable } from 'angularfire2/database';
 import { PlaceService } from './shared/place.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -6,12 +7,9 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './places.component.html',
     styleUrls: ['./places.component.css']
 })
-export class PlacesComponent implements OnInit {
+export class PlacesComponent {
+    places = this.placeService.getPlaces();
 
-    places: any[] = this.placeService.getPlaces();
-
-    constructor(private placeService: PlaceService) {}
-
-    ngOnInit() {
+    constructor(private placeService: PlaceService) {
     }
 }
