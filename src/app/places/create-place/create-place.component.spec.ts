@@ -1,23 +1,22 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CreatePlaceComponent } from './create-place.component';
+import { PlaceEditComponent } from './create-place.component';
 
 describe('CreatePlaceComponent', () => {
-  let component: CreatePlaceComponent;
-  let fixture: ComponentFixture<CreatePlaceComponent>;
+  let component: PlaceEditComponent;
+  let fixture: ComponentFixture<PlaceEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatePlaceComponent ]
+      declarations: [ PlaceEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreatePlaceComponent);
+    fixture = TestBed.createComponent(PlaceEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

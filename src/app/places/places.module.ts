@@ -8,7 +8,7 @@ import { PlacesComponent } from './places.component';
 import { PlacesRoutingModule } from './places-routing.module';
 import { PlaceThumbnailComponent } from './place-thumbnail/place-thumbnail.component';
 import { PlaceDetailsComponent } from './place-details/place-details.component';
-import { CreatePlaceComponent } from './create-place/create-place.component';
+import { PlaceEditComponent } from './create-place/create-place.component';
 
 @NgModule({
     imports: [
@@ -21,7 +21,7 @@ import { CreatePlaceComponent } from './create-place/create-place.component';
         PlaceThumbnailComponent,
         PlaceDetailsComponent,
         StarRatingComponent,
-        CreatePlaceComponent
+        PlaceEditComponent
 ],
     providers: [
         PlaceService
