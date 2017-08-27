@@ -29,4 +29,8 @@ export class PlaceService  {
     updatePlace(key: string, updatedFields: {}) {
         this.places.update(key, updatedFields);
     }
+
+    getCategories() {
+        return this.db.list('/categories');
+    }
 }
