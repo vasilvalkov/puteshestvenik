@@ -1,8 +1,7 @@
-import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
-import { Place } from '../place.model';
+import { Category, Place } from '../place.model';
 
 @Injectable()
 export class PlaceService  {
@@ -20,17 +19,33 @@ export class PlaceService  {
         return this.db.object('/places/' + id);
     }
 
-    createPlace(place: Place) {
-        const newPlaceThenableRef = this.places.push(place);
+    initializePlace(): Place {
+        return <Place>{
+            heading: '',
+            imageUrl: '',
+            thumbUrl: '',
+            rating: 0,
+            category: '',
+            location: { latitude: 0, longitude: 0 },
+            bodyText: '',
+            voters: []
+        };
+    }
 
-        return newPlaceThenableRef;
+    createPlace(place: Place) {
+        return this.places.push(place);
     }
 
     updatePlace(key: string, updatedFields: {}) {
-        this.places.update(key, updatedFields);
+        this.places.update(key, updatedFields)
+            .catch(error => this.handleError(error));
     }
 
-    getCategories() {
-        return this.db.list('/categories');
+    getCategories(): FirebaseListObservable<Category[]> {
+        return <FirebaseListObservable<Category[]>>this.db.list('/categories');
+    }
+
+    handleError(error) {
+        console.log(error);
     }
 }
