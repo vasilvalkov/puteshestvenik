@@ -27,6 +27,8 @@ export class PlaceDetailsComponent implements OnInit, OnDestroy {
             $key: '',
             heading: 'Рилски манастир',
             imageUrl: 'http://www.dinita-tours.com/files/148397219523128.jpg',
+            thumbUrl: '',
+            voters: [],
             rating: 4,
             category: 'религия',
             location: { latitude: 42.134275, longitude: 23.340122 },
