@@ -1,0 +1,46 @@
+<h3 class="col-sm-offset-1">Добави дестинация</h3>
+<section>
+  <form [formGroup]="createPlaceForm" class="form-horizontal" (ngSubmit)="create()" novalidate>
+    <section class="col-sm-11">
+      <div class="form-group" [ngClass]="{ 'has-error': createPlaceForm.get('heading').touched && createPlaceForm.get('heading').invalid}">
+        <label for="inputHeading" class="col-lg-2 control-label">Заглавие</label>
+        <div class="col-lg-10">
+          <input class="form-control" id="inputHeading" placeholder="Заглавие" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+            type="text" formControlName="heading">
+        </div>
+        <span class="text-danger col-sm-offset-2" *ngIf="createPlaceForm.get('heading').touched && createPlaceForm.get('heading').errors?.required">Моля, въведете заглавие!</span>
+        <span class="text-danger col-sm-offset-2" *ngIf="createPlaceForm.get('heading').touched && createPlaceForm.get('heading').errors?.minlength">Заглавието трябва да е поне 3 символа!</span>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': createPlaceForm.get('bodyText').touched && createPlaceForm.get('bodyText').invalid}">
+        <label for="textArea" class="col-lg-2 control-label">Описание</label>
+        <div class="col-lg-10">
+          <textarea class="form-control" rows="3" id="textArea" placeholder="Описание" formControlName="bodyText"></textarea>
+        </div>
+        <span class="text-danger col-sm-offset-2" *ngIf="createPlaceForm.get('bodyText').touched && createPlaceForm.get('bodyText').errors?.required">Моля, въведете описание!</span>
+        <span class="text-danger col-sm-offset-2" *ngIf="createPlaceForm.get('bodyText').touched && createPlaceForm.get('bodyText').errors?.minlength">Описанието трябва да е поне 100 символа!</span>
+      </div>
+      <div class="form-group">
+        <label for="selectCategory" class="col-lg-2 control-label">Категория</label>
+        <div class="col-lg-10">
+          <select class="form-control" id="selectCategory">
+          <option>Избери категория</option>
+          <option *ngFor="let category of categories | async">{{ category.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputImage" class="col-lg-2 control-label">Снимка</label>
+        <div class="col-lg-10">
+          <input class="form-control" id="inputImage" placeholder="Избери снимка" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+            type="file">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button type="reset" class="btn btn-default">Отмени</button>
+          <button type="submit" class="btn btn-primary">Създай</button>
+        </div>
+      </div>
+    </section>
+  </form>
+</section>

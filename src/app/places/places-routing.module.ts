@@ -1,3 +1,4 @@
+import { CreatePlaceComponent } from './create-place/create-place.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -8,6 +9,7 @@ import { PlaceDetailsComponent } from './place-details/place-details.component';
     imports: [
         RouterModule.forChild([
             { path: 'places', component: PlacesComponent },
+            { path: 'places/create', component: CreatePlaceComponent},
             { path: 'places/:id', component: PlaceDetailsComponent }
         ])
     ],
