@@ -3,6 +3,10 @@ export interface Location {
     longitude: number;
 }
 
+export interface Category {
+    name: string;
+}
+
 export interface Place {
     $key: string;
     heading: string;
@@ -12,4 +16,5 @@ export interface Place {
     category: string;
     location: Location;
     bodyText: string;
+    voters: string[];
 }
