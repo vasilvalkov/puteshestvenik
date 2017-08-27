@@ -11,6 +11,6 @@ export const environment = {
     databaseURL: 'https://pateshestvenik-fab85.firebaseio.com/',
     projectId: 'pateshestvenik-fab85',
     storageBucket: 'gs://pateshestvenik-fab85.appspot.com',
-    messagingSenderId: '<your-messaging-sender-id>'
+    messagingSenderId: '848547169858'
   }
 };
