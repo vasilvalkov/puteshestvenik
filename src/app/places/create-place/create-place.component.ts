@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { Router } from '@angular/router';
+import { DecimalPipe } from '@angular/common';
 
+import { FileUploadService } from './../../common/fileUpload.service';
 import { PlaceService } from './../shared/place.service';
 import { Category, Place } from '../place.model';
+import { Upload } from './../../common/upload';
 
 @Component({
     templateUrl: './create-place.component.html',
@@ -14,8 +17,11 @@ export class PlaceEditComponent implements OnInit {
     categories: FirebaseListObservable<Category[]>;
     initialPlace: Place;
     createPlaceForm: FormGroup;
+    currentUpload: Upload;
+    selectedFiles: FileList;
 
     constructor(private placesService: PlaceService,
+        private uploadService: FileUploadService,
         private builder: FormBuilder,
         private router: Router) { }
 
@@ -26,7 +32,8 @@ export class PlaceEditComponent implements OnInit {
         this.createPlaceForm = this.builder.group({
             heading: ['', [Validators.required, Validators.minLength(3)]],
             bodyText: ['', [Validators.required, Validators.minLength(100)]],
-            imageUrl: ['', Validators.required],
+            // imageUrl: ['', Validators.required],
+            // thumbUrl: ['', Validators.required],
             category: ['', Validators.required],
             location: this.builder.group({
                 latitude: [],
@@ -35,15 +42,28 @@ export class PlaceEditComponent implements OnInit {
         });
     }
 
+    detectFiles(event) {
+        this.selectedFiles = event.target.files;
+    }
+
+    uploadPicture() {
+        const file = this.selectedFiles[0];
+        this.currentUpload = new Upload(file);
+        const uploadedFile = this.uploadService.pushUpload(this.currentUpload);
+    }
+
     savePlace(place: Place) {
         if (this.createPlaceForm.dirty) {
-            const newPlace = Object.assign({}, this.initialPlace, place);
+                place.imageUrl = this.uploadService.uploads.url;
+                place.thumbUrl = this.uploadService.uploads.url;
 
-            if (!newPlace.$key) {
-                return this.createPlace(newPlace);
-            }
+                const newPlace = Object.assign({}, this.initialPlace, place);
 
-            return this.updatePlace(newPlace);
+                if (!newPlace.$key) {
+                    return this.createPlace(newPlace);
+                }
+
+                return this.updatePlace(newPlace);
         }
     }
 
@@ -56,6 +76,11 @@ export class PlaceEditComponent implements OnInit {
 
     }
 
+    resetForm() {
+        this.selectedFiles = null;
+        this.createPlaceForm.reset();
+    }
+
     onCreateComplete(createdPlace: string): void {
         const route = '/places/' + createdPlace;
         this.createPlaceForm.reset();
@@ -63,5 +88,4 @@ export class PlaceEditComponent implements OnInit {
         console.log(route);
         this.router.navigate([route]);
     }
-
 }

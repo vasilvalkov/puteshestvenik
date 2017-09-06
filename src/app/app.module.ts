@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
+import { FileUploadService } from './common/fileUpload.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PlacesModule } from './places/places.module';
@@ -25,7 +26,7 @@ import { PlacesModule } from './places/places.module';
     PlacesModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

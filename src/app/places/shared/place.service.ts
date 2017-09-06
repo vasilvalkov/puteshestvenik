@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { Category, Place } from '../place.model';
+import { FileUploadService } from './../../common/fileUpload.service';
 
 @Injectable()
 export class PlaceService  {
