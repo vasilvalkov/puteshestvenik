@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <input class="form-control" #query placeholder="Намери дестинация" type="text">
                 </div>
-                <a href="#modal" type="button" class="btn btn-default" (click)="search(query.value)" data-target="#modal">Търси</a>
+                <a type="button" class="btn btn-default" (click)="search(query.value)" data-target="#modal">Търси</a>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li routerLinkActive="active"><a [routerLink]="['/user/login']">Вход</a></li>
