@@ -1,5 +1,6 @@
 <div class="row">
     <section class="col-sm-3">
+        <img class="img-responsive" src="{{ place?.thumbUrl }}" alt="{{ place?.heading }}">
         <article class="panel panel-default">
             <div class="panel-body">
                 <div>
@@ -14,7 +15,6 @@
     <section class="col-sm-6">
         <h3>{{ place?.heading }}</h3>
         <hr>
-        <img class="img-responsive" src="{{ place?.imageUrl }}" alt="{{ place?.heading }}">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#description" data-toggle="tab" aria-expanded="true">Описание</a></li>
             <li class=""><a href="#map" data-toggle="tab" aria-expanded="false">Карта</a></li>
