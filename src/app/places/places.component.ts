@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./places.component.css']
 })
 export class PlacesComponent implements OnInit {
-    places: FirebaseListObservable<Place[]>; // = this.placeService.getPlaces();
+    places: FirebaseListObservable<Place[]>;
     categories: FirebaseListObservable<Category[]>;
     filterForm: FormGroup;
     allPlaces: Place[];
