@@ -1,6 +1,18 @@
+<form [formGroup]="filterForm" class="form-horizontal" novalidate>
+    <section class="col-sm-12">
+        <div class="form-group">
+            <label for="selectCategory" class="col-lg-2 control-label">Филтрирай:</label>
+            <div class="col-lg-2">
+                <select class="form-control" id="selectCategory" (change)="getSelectedCategory($event)">
+                    <option value="" selected>Всички</option>
+                    <option value="{{ category.name }}" *ngFor="let category of categories | async">{{ category.name }}</option>
+                </select>
+            </div>
+        </div>
+    </section>
+</form>
 <div class="row">
-  <div class="col-sm-3 pull-left" *ngFor="let place of places | async" >
-    <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl"
-      [routerLink]="['/places', place.$key]"></app-place-thumbnail>
-  </div>
+    <div class="col-sm-3 pull-left" *ngFor="let place of visiblePlaces">
+        <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl" [routerLink]="['/places', place.$key]"></app-place-thumbnail>
+    </div>
 </div>
