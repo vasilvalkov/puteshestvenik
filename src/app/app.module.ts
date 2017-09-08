@@ -1,3 +1,8 @@
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
@@ -11,12 +16,15 @@ import { FileUploadService } from './common/fileUpload.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PlacesModule } from './places/places.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent
+,
+    LoginComponent
 ],
   imports: [
     BrowserModule,
@@ -24,9 +32,14 @@ import { PlacesModule } from './places/places.module';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     PlacesModule,
+    ReactiveFormsModule,
+    FormsModule,
+    UserModule,
+    AuthModule,
+    AuthRoutingModule,
     AppRoutingModule
   ],
-  providers: [FileUploadService],
+  providers: [FileUploadService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
