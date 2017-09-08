@@ -34,31 +34,34 @@
                 <a type="button" class="btn btn-default" (click)="search(query.value)" data-target="#modal">Търси</a>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li routerLinkActive="active"><a [routerLink]="['/user/login']">Вход</a></li>
-                <li routerLinkActive="active"><a [routerLink]="['/user/register']">Регистрация</a></li>
+                <li routerLinkActive="active" *ngIf="!authService.authState"><a [routerLink]="['/auth/login']">Вход</a></li>
+                <li routerLinkActive="active" *ngIf="!authService.authState"><a [routerLink]="['/auth/register']">Регистрация</a></li>
+                <li *ngIf="authService.authState"><a [routerLink]="['/']">Изход</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="modal" id="modal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <p *ngIf="!foundPlaces">Няма намерени резултати!</p>
-                <div class="list-group">
-                    <a [routerLink]="['/places', result.$key]" class="list-group-item" *ngFor="let result of foundPlaces">
-                        <h4 class="list-group-item-heading">{{ result.heading }}</h4>
-                        <p class="list-group-item-text">{{ result.bodyText }}</p>
-                    </a>
+<ng-template #searchModal>
+    <div class="modal" id="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p *ngIf="!foundPlaces">Няма намерени резултати!</p>
+                    <div class="list-group">
+                        <a [routerLink]="['/places', result.$key]" class="list-group-item" *ngFor="let result of foundPlaces">
+                            <h4 class="list-group-item-heading">{{ result.heading }}</h4>
+                            <p class="list-group-item-text">{{ result.bodyText }}</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</ng-template>
 <!-- <section *ngIf="foundPlaces" class="row">
     <div class="col-sm-3 pull-left" *ngFor="let place of foundPlaces">
         <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl" [routerLink]="['/places', place.$key]"></app-place-thumbnail>
