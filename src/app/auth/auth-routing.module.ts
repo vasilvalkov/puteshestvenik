@@ -1,4 +1,4 @@
-import { LoginComponent } from './../login/login.component';
+import { PlaceEditComponent } from './../places/place-edit/place-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -9,8 +9,7 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'auth',
                 children: [
-                    { path: 'login', component: LoginComponent },
-                    // { path: 'register', component: RegisterComponent},
+                    { path: 'create-place', component: PlaceEditComponent},
                     // { path: 'profile', component: UserProfileComponent }]
                 ]
             }
