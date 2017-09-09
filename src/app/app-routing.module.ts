@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,7 @@ const routes: Routes = [
         (do not place feature module routes here, use an own -routing.module.ts in the feature instead)
   */
   { path: 'login', component: LoginComponent },
-  // { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full'}
 ];

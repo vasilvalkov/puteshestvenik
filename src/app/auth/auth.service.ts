@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
 
 @Injectable()
-export class AuthService implements OnChanges {
+export class AuthService implements OnInit {
 
     authState: any = null;
     currentUser: Observable<firebase.User>;
 
-    ngOnChanges(): void {
+    ngOnInit(): void {
         this.afAuth.authState.subscribe((auth) => {
             this.authState = auth;
         });
@@ -21,6 +21,14 @@ export class AuthService implements OnChanges {
         private db: AngularFireDatabase,
         private router: Router) {
         this.currentUser = afAuth.authState;
+    }
+
+    createUserWithEmailAndPassword(email: string, pass: string) {
+        return this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
+            .then((user) => {
+                this.authState = user;
+            })
+            .catch(error => console.log(error));
     }
 
     login(email: string, password: string) {

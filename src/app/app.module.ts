@@ -17,14 +17,16 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PlacesModule } from './places/places.module';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserService } from './user/shared/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
-,
-    LoginComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent
 ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { LoginComponent } from './login/login.component';
     AuthRoutingModule,
     AppRoutingModule
   ],
-  providers: [FileUploadService, AuthService],
+  providers: [FileUploadService, AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

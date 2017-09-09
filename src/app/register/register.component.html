@@ -1,0 +1,83 @@
+<h3 class="col-sm-offset-1">Регистрация</h3>
+<section class="margin-top-40">
+    <form [formGroup]="registerForm" class="form-horizontal" (ngSubmit)="register(registerForm.value)" novalidate>
+        <section class="col-sm-11">
+            <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('username').touched && registerForm.get('username').invalid}">
+                <label for="inputUsername" class="col-lg-2 control-label">Потребителско име</label>
+                <div class="col-lg-5">
+                    <input class="form-control" id="inputUsername" placeholder="Потребителско име" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                        type="text" formControlName="username">
+                    <span class="text-danger" *ngIf="registerForm.get('username').touched && registerForm.get('username').errors?.required">Моля, въведете потребитско име!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('username').touched && registerForm.get('username').errors?.minlength">Потребителското име трябва да е поне 3 символа!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('username').touched && registerForm.get('username').errors?.maxlength">Потребителското име трябва да е най-много 20 символа!</span>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('firstName').touched && registerForm.get('firstName').invalid}">
+                <label for="inputFirstName" class="col-lg-2 control-label">Име</label>
+                <div class="col-lg-5">
+                    <input class="form-control" id="inputFirstName" placeholder="Име" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                        type="text" formControlName="firstName">
+                    <span class="text-danger" *ngIf="registerForm.get('firstName').touched && registerForm.get('firstName').errors?.required">Моля, въведете Вашето име!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('firstName').touched && registerForm.get('firstName').errors?.minlength">Името трябва да е поне 2 символа!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('firstName').touched && registerForm.get('firstName').errors?.maxlength">Името трябва да е най-много 20 символа!</span>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('lastName').touched && registerForm.get('lastName').invalid}">
+                <label for="inputLastName" class="col-lg-2 control-label">Фамилия</label>
+                <div class="col-lg-5">
+                    <input class="form-control" id="inputLastName" placeholder="Фамилия" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                        type="text" formControlName="lastName">
+                    <span class="text-danger" *ngIf="registerForm.get('lastName').touched && registerForm.get('lastName').errors?.required">Моля, въведете Вашата фамилия!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('lastName').touched && registerForm.get('lastName').errors?.minlength">Фамилията трябва да е поне 2 символа!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('lastName').touched && registerForm.get('lastName').errors?.maxlength">Фамилията трябва да е най-много 20 символа!</span>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('email').touched && registerForm.get('email').invalid}">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-5">
+                    <input type="text" formControlName="email" class="form-control" id="inputEmail" placeholder="Email">
+                    <span class="text-danger" *ngIf="registerForm.get('email').touched && registerForm.get('email').errors?.required">Моля, въведете email!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('email').touched && registerForm.get('email').errors?.pattern">Невалиден e-mail!</span>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('password').touched && registerForm.get('password').invalid}">
+                <label for="inputPassword" class="col-lg-2 control-label">Парола</label>
+                <div class="col-lg-5">
+                    <input class="form-control" id="inputPassword" placeholder="Парола" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                        type="text" formControlName="password">
+                    <span class="text-danger" *ngIf="registerForm.get('password').touched && registerForm.get('password').errors?.required">Моля, въведете парола!</span>
+                    <span class="text-danger" *ngIf="registerForm.get('password').touched && registerForm.get('password').errors?.minlength">Паролата трябва да е поне 6 символа!</span>
+                </div>
+            </div>
+            <!-- <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').invalid}">
+                    <label for="inputConfirmPassword" class="col-lg-2 control-label">Потвърдете паролата</label>
+                    <div class="col-lg-5">
+                        <input class="form-control" id="inputConfirmPassword" placeholder="Потвърдете паролата" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                            type="text" formControlName="confirmPassword">
+                        <span class="text-danger" *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').errors?.required">Моля, въведете отново паролата за потяърждение!</span>
+                        <span class="text-danger" *ngIf="registerForm.get('confirmPassword').touched && registerForm.get('confirmPassword').errors?.minlength">Паролата трябва да е поне 6 символа!</span>
+                    </div>
+                </div> -->
+            <!-- <div class="form-group">
+                <label for="inputImage" class="col-lg-2 control-label">Снимка</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputImage" placeholder="Избери снимка" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                        type="file" (change)="detectFiles($event)">
+                    <div *ngIf="currentUpload">
+                        <div class="progress">
+                            <div class="progress-bar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                        </div>
+                        {{ currentUpload?.progress | number:'1.0-2' }}% завършени
+                    </div>
+                    <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="uploadPicture()">Качи снимка</button>
+                </div>
+            </div> -->
+            <div class="form-group margin-top-40">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default" (click)="resetForm()">Отмени</button>
+                    <button type="submit" class="btn btn-primary">Създай профил</button>
+                </div>
+            </div>
+        </section>
+    </form>
+</section>
