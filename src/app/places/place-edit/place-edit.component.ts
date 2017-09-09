@@ -10,8 +10,8 @@ import { Category, Place } from '../place.model';
 import { Upload } from './../../common/upload';
 
 @Component({
-    templateUrl: './create-place.component.html',
-    styleUrls: ['./create-place.component.css']
+    templateUrl: './place-edit.component.html',
+    styleUrls: ['./place-edit.component.css']
 })
 export class PlaceEditComponent implements OnInit {
     categories: FirebaseListObservable<Category[]>;

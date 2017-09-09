@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PlaceEditComponent } from './create-place.component';
+import { PlaceEditComponent } from './place-edit.component';
 
 describe('CreatePlaceComponent', () => {
   let component: PlaceEditComponent;

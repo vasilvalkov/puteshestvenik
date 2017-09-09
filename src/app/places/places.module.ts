@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PlacesComponent } from './places.component';
 import { PlacesRoutingModule } from './places-routing.module';
 import { PlaceDetailsComponent } from './place-details/place-details.component';
-import { PlaceEditComponent } from './create-place/create-place.component';
+import { PlaceEditComponent } from './place-edit/place-edit.component';
 
 @NgModule({
     imports: [
