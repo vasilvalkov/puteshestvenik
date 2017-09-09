@@ -12,4 +12,6 @@
 
 Pateshestvenik is a SPA Angular application for travellers and hikers to share information about places in Bulgaria. Registered users can comment and vote for existing places. Also, they are able to create new places.
 
-**Website of the application:** [HERE](https://pateshestvenik-fab85.firebaseapp.com/)
+[**Project description:**](./docs/Project-description.md)
+
+[**Website of the application:** ](https://pateshestvenik-fab85.firebaseapp.com/)
