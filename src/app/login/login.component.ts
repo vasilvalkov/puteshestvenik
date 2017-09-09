@@ -22,11 +22,11 @@ export class LoginComponent implements OnInit {
     }
 
     loginUser(credentials) {
-        this.authService.login(credentials.email, credentials.password);
-        console.log(this.authService.authState);
-        if (this.authService.authState) {
-            this.router.navigate(['/places']);
-        }
+        this.authService.login(credentials.email, credentials.password)
+            .then((user) => {
+                this.router.navigate(['/places']);
+            })
+            .catch(error => console.log(error));
     }
 
 }

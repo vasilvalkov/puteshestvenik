@@ -27,17 +27,18 @@
           </ul>
         </li> -->
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li routerLinkActive="active" *ngIf="!currentUser"><a [routerLink]="['/login']">Вход</a></li>
+                <li routerLinkActive="active" *ngIf="!currentUser"><a [routerLink]="['/register']">Регистрация</a></li>
+                <li *ngIf="currentUser"><a [routerLink]="['/auth/profile']">Hi, {{ currentUser?.firstName }}</a></li>
+                <li *ngIf="currentUser"><a href="" (click)="logout()">Изход</a></li>
+            </ul>
             <form class="navbar-form navbar-right">
                 <div class="form-group">
                     <input class="form-control" #query placeholder="Намери дестинация" type="text">
                 </div>
                 <a type="button" class="btn btn-default" (click)="search(query.value)" data-target="#modal">Търси</a>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li routerLinkActive="active" *ngIf="!authService.authState"><a [routerLink]="['/auth/login']">Вход</a></li>
-                <li routerLinkActive="active" *ngIf="!authService.authState"><a [routerLink]="['/auth/register']">Регистрация</a></li>
-                <li *ngIf="authService.authState"><a [routerLink]="['/']">Изход</a></li>
-            </ul>
         </div>
     </div>
 </nav>

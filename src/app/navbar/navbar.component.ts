@@ -1,8 +1,9 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { Place } from './../places/place.model';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { PlaceService } from './../places/shared/place.service';
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from 'bootstrap';
 
 
@@ -11,19 +12,34 @@ import { NgbModal, ModalDismissReasons } from 'bootstrap';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnChanges {
+    hasUser: boolean;
+    currentUser;
     @Output() queryResult = new EventEmitter();
     foundPlaces: Place[] = [];
 
     places: FirebaseListObservable<Place[]>;
     allPlaces: Place[] = [];
 
-    constructor(private placeService: PlaceService, public authService: AuthService) { }
+    constructor(private placeService: PlaceService,
+        public authService: AuthService,
+        private router: Router) { }
 
     ngOnInit() {
         this.places = this.placeService.getPlaces();
         this.places.subscribe(places => {
             this.allPlaces = places;
+        });
+        this.authService.currentUser.subscribe(user => {
+            this.currentUser = user;
+        });
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.hasUser = !!this.authService.authState;
+console.log('navbar changes');
+        this.authService.currentUser.subscribe(user => {
+            this.currentUser = user;
         });
     }
 
@@ -38,6 +54,9 @@ export class NavbarComponent implements OnInit {
 
     logout() {
         this.authService.logout();
+        if (this.authService.authState) {
+            this.router.navigate(['/places']);
+        }
     }
     // open(content) {
     //     this.modalService.open(content).result.then((result) => {
