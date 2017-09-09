@@ -28,7 +28,7 @@ export class AuthService implements OnChanges {
     }
 
     logout() {
-        this.afAuth.auth.signOut();
+        return this.afAuth.auth.signOut();
     }
 
 }
