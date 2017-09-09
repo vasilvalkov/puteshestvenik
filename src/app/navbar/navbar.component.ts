@@ -3,7 +3,7 @@ import { AuthService } from './../auth/auth.service';
 import { Place } from './../places/place.model';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { PlaceService } from './../places/shared/place.service';
-import { Component, OnInit, Output, EventEmitter, Inject, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from 'bootstrap';
 
 
@@ -12,8 +12,8 @@ import { NgbModal, ModalDismissReasons } from 'bootstrap';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnChanges {
-    hasUser: boolean;
+export class NavbarComponent implements OnInit, OnDestroy {
+
     currentUser;
     @Output() queryResult = new EventEmitter();
     foundPlaces: Place[] = [];
@@ -35,14 +35,6 @@ export class NavbarComponent implements OnInit, OnChanges {
         });
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        this.hasUser = !!this.authService.authState;
-console.log('navbar changes');
-        this.authService.currentUser.subscribe(user => {
-            this.currentUser = user;
-        });
-    }
-
     search(query) {
         this.foundPlaces = this.allPlaces.filter(p => {
             if (p.heading.indexOf(query) !== -1 || p.bodyText.indexOf(query) !== -1) {
@@ -53,11 +45,16 @@ console.log('navbar changes');
     }
 
     logout() {
-        this.authService.logout();
-        if (this.authService.authState) {
-            this.router.navigate(['/places']);
-        }
+        this.authService.logout()
+            .then(() => {
+                this.router.navigate(['/places']);
+            });
     }
+
+    ngOnDestroy(): void {
+        this.currentUser.unsubscribe();
+    }
+
     // open(content) {
     //     this.modalService.open(content).result.then((result) => {
     //       this.closeResult = `Closed with: ${result}`;
