@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { Place } from './../places/place.model';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
 import { PlaceService } from './../places/shared/place.service';
 import { Component, OnInit, Output, EventEmitter, Inject, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from 'bootstrap';
+import { User as FbUser } from 'firebase/app';
 
 
 @Component({
@@ -12,9 +13,9 @@ import { NgbModal, ModalDismissReasons } from 'bootstrap';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
 
-    currentUser;
+    currentUser: FbUser;
     @Output() queryResult = new EventEmitter();
     foundPlaces: Place[] = [];
 
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     constructor(private placeService: PlaceService,
         public authService: AuthService,
-        private router: Router) { }
+        private router: Router,
+        private db: AngularFireDatabase) { }
 
     ngOnInit() {
         this.places = this.placeService.getPlaces();
@@ -31,7 +33,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
             this.allPlaces = places;
         });
         this.authService.currentUser.subscribe(user => {
-            this.currentUser = user;
+            this.db.object(`users/${user.uid}`).subscribe(data => {
+                const updatedUser = Object.assign({}, data, user);
+                console.log('auth updated user', updatedUser);
+                this.currentUser = updatedUser;
+            });
         });
     }
 
@@ -49,10 +55,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
             .then(() => {
                 this.router.navigate(['/places']);
             });
-    }
-
-    ngOnDestroy(): void {
-        this.currentUser.unsubscribe();
     }
 
     // open(content) {
