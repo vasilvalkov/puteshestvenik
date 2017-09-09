@@ -2,16 +2,20 @@
     <div class="col-sm-offset-1">
         <h3>Вход</h3>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{ 'has-error': loginForm.get('email').touched && loginForm.get('email').invalid}">
         <label for="inputEmail" class="col-lg-2 control-label">Email</label>
         <div class="col-lg-5">
             <input type="text" formControlName="email" class="form-control" id="inputEmail" placeholder="Email">
+            <span class="text-danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors?.required">Моля, въведете email!</span>
+            <span class="text-danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors?.pattern">Невалиден e-mail!</span>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{ 'has-error': loginForm.get('password').touched && loginForm.get('password').invalid}">
         <label for="inputPassword" class="col-lg-2 control-label">Парола</label>
         <div class="col-lg-5">
             <input type="password" formControlName="password" class="form-control" id="inputPassword" placeholder="Парола">
+            <span class="text-danger" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors?.required">Моля, въведете парола!</span>
+            <span class="text-danger" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors?.minlength">Паролата трябва да е поне 6 символа!</span>
         </div>
     </div>
     <div class="form-group margin-top-80">

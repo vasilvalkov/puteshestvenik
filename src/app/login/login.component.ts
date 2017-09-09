@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.builder.group({
-            email: ['', [Validators.required, Validators.pattern('/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/')]],
+            // tslint:disable-next-line:max-line-length
+            email: ['', [Validators.required, Validators.pattern(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
