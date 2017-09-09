@@ -3,7 +3,7 @@
 ## Пътешественик
 
 
-|   |              |          **The Zippy Dogfishes**           |                                                          |
+| **The Zippy Dogfishes** |
 |:-:|:------------:|:---------------------------------------------:|:--------------------------------------------------------:|
 |№  |   Name       |              GitHub Аccount                   |                Telerik Academy Аccount                   |
 |1. |Vasil Valkov  |[_vasilvalkov_](https://github.com/vasilvalkov)|[_vasilv_](http://telerikacademy.com/Users/vasilv)        |
@@ -12,6 +12,6 @@
 
 Pateshestvenik is a SPA Angular application for travellers and hikers to share information about places in Bulgaria. Registered users can comment and vote for existing places. Also, they are able to create new places.
 
-[**Project description:**](./docs/Project-description.md)
+[**Project description**](./docs/Project-description.md)
 
-[**Website of the application:** ](https://pateshestvenik-fab85.firebaseapp.com/)
+[**Website of the application** ](https://pateshestvenik-fab85.firebaseapp.com/)
