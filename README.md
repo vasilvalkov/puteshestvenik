@@ -3,7 +3,7 @@
 ## Пътешественик
 
 
-| **The Zippy Dogfishes** |
+|   |              |         **The Zippy Dogfishes**               |                                                          |
 |:-:|:------------:|:---------------------------------------------:|:--------------------------------------------------------:|
 |№  |   Name       |              GitHub Аccount                   |                Telerik Academy Аccount                   |
 |1. |Vasil Valkov  |[_vasilvalkov_](https://github.com/vasilvalkov)|[_vasilv_](http://telerikacademy.com/Users/vasilv)        |
