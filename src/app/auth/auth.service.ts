@@ -1,15 +1,15 @@
-import { Injectable, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase';
+import { User as FbUser } from 'firebase/app';
 
 @Injectable()
 export class AuthService implements OnInit {
 
-    authState: any = null;
-    currentUser: Observable<firebase.User>;
+    authState: FbUser = null;
+    currentUser: Observable<FbUser>;
 
     ngOnInit(): void {
         this.afAuth.authState.subscribe((auth) => {
