@@ -1,0 +1,78 @@
+<h3 class="col-sm-offset-1">Профилът на {{ currentUser?.firstName + ' ' + currentUser?.lastName}}</h3>
+<section class="row margin-top-40">
+    <section class="col-sm-11">
+        <div class="row">
+            <div class="col-lg-2 text-right"><strong>Потребителско име</strong></div>
+            <div class="col-lg-5">{{ currentUser?.username }}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 text-right"><strong>Име</strong></div>
+            <div class="col-lg-5">{{ currentUser?.firstName }}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 text-right"><strong>Фамилия</strong></div>
+            <div class="col-lg-5">{{ currentUser?.lastName }}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 text-right"><strong>e-mail</strong></div>
+            <div class="col-lg-5">{{ currentUser?.email }}</div>
+        </div>
+        <!-- <div class="form-group" [ngClass]="{ 'has-error': editProfileForm.get('firstName').touched && editProfileForm.get('firstName').invalid}">
+            <label for="inputFirstName" class="col-lg-2 control-label">Име</label>
+            <div class="col-lg-5">
+                <input class="form-control" id="inputFirstName" placeholder="Име" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                    type="text" formControlName="firstName">
+                <span class="text-danger" *ngIf="editProfileForm.get('firstName').touched && editProfileForm.get('firstName').errors?.required">Моля, въведете Вашето име!</span>
+                <span class="text-danger" *ngIf="editProfileForm.get('firstName').touched && editProfileForm.get('firstName').errors?.minlength">Името трябва да е поне 2 символа!</span>
+                <span class="text-danger" *ngIf="editProfileForm.get('firstName').touched && editProfileForm.get('firstName').errors?.maxlength">Името трябва да е най-много 20 символа!</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': editProfileForm.get('lastName').touched && editProfileForm.get('lastName').invalid}">
+            <label for="inputLastName" class="col-lg-2 control-label">Фамилия</label>
+            <div class="col-lg-5">
+                <input class="form-control" id="inputLastName" placeholder="Фамилия" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                    type="text" formControlName="lastName">
+                <span class="text-danger" *ngIf="editProfileForm.get('lastName').touched && editProfileForm.get('lastName').errors?.required">Моля, въведете Вашата фамилия!</span>
+                <span class="text-danger" *ngIf="editProfileForm.get('lastName').touched && editProfileForm.get('lastName').errors?.minlength">Фамилията трябва да е поне 2 символа!</span>
+                <span class="text-danger" *ngIf="editProfileForm.get('lastName').touched && editProfileForm.get('lastName').errors?.maxlength">Фамилията трябва да е най-много 20 символа!</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': editProfileForm.get('email').touched && editProfileForm.get('email').invalid}">
+            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+            <div class="col-lg-5">
+                <input type="text" formControlName="email" class="form-control" id="inputEmail" placeholder="Email">
+                <span class="text-danger" *ngIf="editProfileForm.get('email').touched && editProfileForm.get('email').errors?.required">Моля, въведете email!</span>
+                <span class="text-danger" *ngIf="editProfileForm.get('email').touched && editProfileForm.get('email').errors?.pattern">Невалиден e-mail!</span>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': editProfileForm.get('password').touched && editProfileForm.get('password').invalid}">
+            <label for="inputPassword" class="col-lg-2 control-label">Парола</label>
+            <div class="col-lg-5">
+                <input class="form-control" id="inputPassword" placeholder="Парола" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                    type="text" formControlName="password">
+                <span class="text-danger" *ngIf="editProfileForm.get('password').touched && editProfileForm.get('password').errors?.required">Моля, въведете парола!</span>
+                <span class="text-danger" *ngIf="editProfileForm.get('password').touched && editProfileForm.get('password').errors?.minlength">Паролата трябва да е поне 6 символа!</span>
+            </div>
+        </div> -->
+        <!-- <div class="form-group">
+                <label for="inputImage" class="col-lg-2 control-label">Снимка</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputImage" placeholder="Избери снимка" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                        type="file" (change)="detectFiles($event)">
+                    <div *ngIf="currentUpload">
+                        <div class="progress">
+                            <div class="progress-bar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                        </div>
+                        {{ currentUpload?.progress | number:'1.0-2' }}% завършени
+                    </div>
+                    <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="uploadPicture()">Качи снимка</button>
+                </div>
+            </div> -->
+        <!-- <div class="form-group margin-top-40">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default" (click)="resetForm()">Отмени</button>
+                <button type="submit" class="btn btn-primary">Създай профил</button>
+            </div>
+        </div> -->
+    </section>
+</section>
