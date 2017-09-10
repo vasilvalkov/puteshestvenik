@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PlacesModule } from './../places.module';
 import { PlaceService } from '../shared/place.service';
 import { Place } from '../place.model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     templateUrl: './place-details.component.html',
@@ -11,7 +12,7 @@ import { Place } from '../place.model';
 })
 export class PlaceDetailsComponent implements OnInit, OnDestroy {
     place: Place;
-    private getPlaceSubscription;
+    private getPlaceSubscription: Subscription;
 
     constructor(private placeService: PlaceService, private route: ActivatedRoute) { }
 
@@ -19,6 +20,7 @@ export class PlaceDetailsComponent implements OnInit, OnDestroy {
         this.getPlaceSubscription = this.placeService.getPlace(this.route.snapshot.params['id'])
             .subscribe(place => {
                 this.place = place;
+                console.log(this.place.comments);
             });
     }
 

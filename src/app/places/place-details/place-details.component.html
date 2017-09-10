@@ -29,9 +29,8 @@
                 &markers=color:blue%7Clabel:S%7C{{place?.location?.latitude}},{{place?.location?.longitude}}&key=AIzaSyAWUxEBDtca3Y9X_rdnOONWQBbDblAekp8" alt="">
             </div>
             <div class="tab-pane fade" id="comments">
-                <p *ngIf="place?.comments?.length === 0 || !place?.comments">Все още няма коментари за това място.</p>
-                
-                <!-- <app-comment *ngFor="let comment of place?.comments" comment-data="comment"></app-comment> -->
+                <p class="text-center" *ngIf="place?.comments?.length === 0 || !place?.comments">Все още няма коментари за това място.</p>
+                <app-comment *ngFor="let comment of place?.comments" [commentData]="comment"></app-comment>
             </div>
         </div>
     </section>
