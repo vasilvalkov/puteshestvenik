@@ -30,6 +30,8 @@
             </div>
             <div class="tab-pane fade" id="comments">
                 <p *ngIf="place?.comments?.length === 0 || !place?.comments">Все още няма коментари за това място.</p>
+                
+                <!-- <app-comment *ngFor="let comment of place?.comments" comment-data="comment"></app-comment> -->
             </div>
         </div>
     </section>

@@ -17,4 +17,5 @@ export interface Place {
     location: Location;
     bodyText: string;
     voters: string[];
+    comments: Comment[];
 }

@@ -1,3 +1,4 @@
+import { CommentComponent } from './../comment/comment.component';
 import { PlaceThumbnailComponent } from './place-thumbnail/place-thumbnail.component';
 import { StarRatingComponent } from './../common/star-rating/star-rating.component';
 import { PlaceService } from './shared/place.service';
@@ -21,7 +22,8 @@ import { PlaceEditComponent } from './place-edit/place-edit.component';
         PlaceDetailsComponent,
         StarRatingComponent,
         PlaceEditComponent,
-        PlaceThumbnailComponent
+        PlaceThumbnailComponent,
+        CommentComponent
 ],
     providers: [
         PlaceService
