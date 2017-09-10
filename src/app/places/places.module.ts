@@ -24,7 +24,10 @@ import { PlaceEditComponent } from './place-edit/place-edit.component';
         PlaceEditComponent,
         PlaceThumbnailComponent,
         CommentComponent
-],
+    ],
+    exports: [
+        PlaceThumbnailComponent
+    ],
     providers: [
         PlaceService
     ]
