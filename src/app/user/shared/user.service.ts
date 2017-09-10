@@ -43,19 +43,18 @@ export class UserService {
         this.authService.createUserWithEmailAndPassword(user.email, user.password)
             .then(createdUser => {
                 this.authService.currentUser.subscribe(newUser => {
-                    console.log('newUser', newUser);
                     this.currentUser = newUser;
                     this.updateUser(user);
                     this.roter.navigate(['/places']);
                 });
-                // this.currentUser = createdUser;
             });
     }
 
     updateUser(user: User) {
         this.currentUser.updateProfile({
             displayName: user.username,
-            photoURL: null
+            // tslint:disable-next-line:max-line-length
+            photoURL: 'https://firebasestorage.googleapis.com/v0/b/pateshestvenik-fab85.appspot.com/o/users%2Favatar.jpg?alt=media&token=cf2f6546-4b2f-4537-bd5d-3bb7d23a9039'
         })
             .then(() => {
                 console.log('saving data to db...');
@@ -64,8 +63,6 @@ export class UserService {
     }
 
     private updateUserData(userData: User): void {
-        console.log('in db now with userData ->', userData);
-        console.log('curreent user', this.currentUser);
         // Writes additional user data to realtime db
         // as no additional properties can be added to FbUser
         if (this.currentUser) {
