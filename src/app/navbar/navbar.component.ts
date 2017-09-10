@@ -7,6 +7,7 @@ import { Component, OnInit, Output, EventEmitter, Inject, OnChanges, SimpleChang
 import { NgbModal, ModalDismissReasons } from 'bootstrap';
 import { User as FbUser } from 'firebase/app';
 
+declare var $: any;
 
 @Component({
     selector: 'app-navbar',
@@ -36,7 +37,6 @@ export class NavbarComponent implements OnInit {
             if (user) {
                 this.db.object(`users/${user.uid}`).subscribe(data => {
                     const updatedUser = Object.assign({}, data, user);
-                    console.log('auth updated user', updatedUser);
                     this.currentUser = updatedUser;
                 });
             }
@@ -49,6 +49,7 @@ export class NavbarComponent implements OnInit {
                 return p;
             }
         });
+        $('#modal').modal('show');
         // this.modalService.show(el);
     }
 
