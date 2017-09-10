@@ -42,29 +42,24 @@
         </div>
     </div>
 </nav>
-<ng-template #searchModal>
-    <div class="modal" id="modal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <p *ngIf="!foundPlaces">Няма намерени резултати!</p>
-                    <div class="list-group">
-                        <a [routerLink]="['/places', result.$key]" class="list-group-item" *ngFor="let result of foundPlaces">
-                            <h4 class="list-group-item-heading">{{ result.heading }}</h4>
-                            <p class="list-group-item-text">{{ result.bodyText }}</p>
-                        </a>
-                    </div>
+<!-- <ng-template #searchModal> -->
+<div class="modal" id="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Резултати за: {{ searchQueryString }} </h4>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                    <a (click)="closeModal(result.$key)" class="list-group-item" *ngFor="let result of foundPlaces">
+                        <h4 class="list-group-item-heading">{{ result.heading }}</h4>
+                        <p class="list-group-item-text">{{ result.bodyText }}</p>
+                    </a>
+                    <p class="list-group-item-text" *ngIf="!foundPlaces">Няма намерени резултати!</p>
                 </div>
             </div>
         </div>
     </div>
-</ng-template>
-<!-- <section *ngIf="foundPlaces" class="row">
-    <div class="col-sm-3 pull-left" *ngFor="let place of foundPlaces">
-        <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl" [routerLink]="['/places', place.$key]"></app-place-thumbnail>
-    </div>
-</section> -->
+</div>
+<!-- </ng-template> -->

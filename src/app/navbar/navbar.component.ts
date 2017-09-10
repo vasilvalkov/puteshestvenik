@@ -15,7 +15,7 @@ declare var $: any;
     styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+    searchQueryString: string;
     currentUser: FbUser;
     @Output() queryResult = new EventEmitter();
     foundPlaces: Place[] = [];
@@ -44,13 +44,20 @@ export class NavbarComponent implements OnInit {
     }
 
     search(query) {
+        this.searchQueryString = query;
+
         this.foundPlaces = this.allPlaces.filter(p => {
             if (p.heading.indexOf(query) !== -1 || p.bodyText.indexOf(query) !== -1) {
                 return p;
             }
         });
+
         $('#modal').modal('show');
-        // this.modalService.show(el);
+    }
+
+    closeModal(param) {
+        $('#modal').modal('toggle');
+        this.router.navigate(['/places', param]);
     }
 
     logout() {
@@ -59,10 +66,4 @@ export class NavbarComponent implements OnInit {
                 this.router.navigate(['/places']);
             });
     }
-
-    // open(content) {
-    //     this.modalService.open(content).result.then((result) => {
-    //       this.closeResult = `Closed with: ${result}`;
-    //     });
-    //   }
 }
