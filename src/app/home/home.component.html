@@ -1,1 +1,28 @@
-<h1>А сега накъде?</h1>
+<section class="jumbotron row">
+    <section class="col-md-6 pull-left">
+        <h1>А сега накъде?</h1>
+        <p>Научи повече за местата в България, които искаш да посетиш.</p>
+        <p><a [routerLink]="['/register']" class="btn btn-primary btn-lg">Регистрирай се</a></p>
+    </section>
+    <section class="col-md-6 pull-left">
+        <div id="carouselControls" class="carousel slide" data-ride="carousel" data-interval="4000">
+            <div class="carousel-inner" align="center" role="listbox">
+                <div class="item" [ngClass]="{ 'active' : i == 0}" *ngFor="let place of places; let i = index">
+                    <img class="img-responsive d-block img-fluid" src="{{place?.imageUrl}}" alt="First slide" width="100%">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{place?.heading}}</h3>
+                        <p>{{place?.bodyText}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<section>
+    <h3>Най-харесвани</h3>
+    <div class="row">
+        <div class="col-sm-3 pull-left" *ngFor="let place of topPlaces; let i=index">
+            <app-place-thumbnail *ngIf="i < 4" [heading]="place?.heading" [imageUrl]="place?.thumbUrl" [routerLink]="['/places', place.$key]"></app-place-thumbnail>
+        </div>
+    </div>
+</section>
