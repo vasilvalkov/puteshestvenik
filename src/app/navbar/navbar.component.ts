@@ -33,11 +33,13 @@ export class NavbarComponent implements OnInit {
             this.allPlaces = places;
         });
         this.authService.currentUser.subscribe(user => {
-            this.db.object(`users/${user.uid}`).subscribe(data => {
-                const updatedUser = Object.assign({}, data, user);
-                console.log('auth updated user', updatedUser);
-                this.currentUser = updatedUser;
-            });
+            if (user) {
+                this.db.object(`users/${user.uid}`).subscribe(data => {
+                    const updatedUser = Object.assign({}, data, user);
+                    console.log('auth updated user', updatedUser);
+                    this.currentUser = updatedUser;
+                });
+            }
         });
     }
 
