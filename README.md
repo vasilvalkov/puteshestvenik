@@ -10,8 +10,8 @@
 |2. |Iskren Donev |[_iDonev_](https://github.com/idonev)    |[_iDonev_](http://telerikacademy.com/Users/idonev)  |
 
 
-Pateshestvenik is a SPA Angular application for travellers and hikers to share information about places in Bulgaria. Registered users can comment and vote for existing places. Also, they are able to create new places.
+Pateshestvenik is a Single-page Angular application for travellers and hikers to share information about places in Bulgaria. Registered users can comment and vote for existing places. Also, they are able to create new places.
 
-[**Project description**](./docs/Project-description.md)
+:bulb: [**Project description**](./docs/Project-description.md)
 
-[**Website of the application** ](https://pateshestvenik-fab85.firebaseapp.com/)
+:bulb: [**Website of the application** ](https://pateshestvenik-fab85.firebaseapp.com/)
