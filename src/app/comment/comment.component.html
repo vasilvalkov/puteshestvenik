@@ -6,6 +6,6 @@
         {{ commentData.body }}
     </div>
     <div class="panel-footer">
-        <span>Публикувано на: {{commentData.date}} </span><span class="pull-right">От: {{ commentData.author }}</span>
+        <span>Публикувано на: {{commentData.date | date}} </span><span class="pull-right">От: {{ commentData.author }}</span>
     </div>
 </div>
