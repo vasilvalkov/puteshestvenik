@@ -4,7 +4,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -41,7 +41,7 @@ import { UserService } from './user/shared/user.service';
     AuthRoutingModule,
     AppRoutingModule
   ],
-  providers: [FileUploadService, AuthService, UserService],
+  providers: [FileUploadService, AuthService, UserService, { provide: LOCALE_ID, useValue: 'bg-BG' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
