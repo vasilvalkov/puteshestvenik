@@ -1,4 +1,4 @@
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire//database';
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User as FbUser } from 'firebase/app';
@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         this.authService.currentUser.subscribe(user => {
             if (user) {
-                this.db.object(`users/${user.uid}`).subscribe(data => {
+                this.db.object(`users/${user.uid}`).valueChanges().subscribe(data => {
                     const updatedUser = Object.assign({}, data, user);
                     this.currentUser = updatedUser;
                 });

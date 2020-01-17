@@ -1,42 +1,42 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Place, Category } from './place.model';
-import { FirebaseListObservable } from 'angularfire2/database';
 import { PlaceService } from './shared/place.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: './places.component.html',
     styleUrls: ['./places.component.css']
 })
 export class PlacesComponent implements OnInit {
-    places: FirebaseListObservable<Place[]>;
-    categories: FirebaseListObservable<Category[]>;
-    filterForm: FormGroup;
-    allPlaces: Place[];
-    visiblePlaces: Place[] = [];
-    orderedPlaces: Place[] = [];
-    filterBy = '';
-    orderBy = '';
 
-    constructor(private placeService: PlaceService,
-        private builder: FormBuilder) {
-    }
+    categories: Observable<Category[]>;
+    filterForm: FormGroup;
+    visiblePlaces: Place[] = [];
+
+    private filterBy = '';
+    private orderBy = '';
+    private allPlaces: Place[];
+
+    constructor(
+        private placeService: PlaceService,
+        private builder: FormBuilder
+    ) { }
 
     ngOnInit(): void {
-        this.places = this.placeService.getPlaces();
-        this.categories = this.placeService.getCategories();
+        this.categories = this.placeService.getCategories().valueChanges();
 
         this.filterForm = this.builder.group({
             categoryName: 'Категория'
         });
 
-        this.places.subscribe(places => {
+        this.placeService.getPlaces().valueChanges().subscribe(places => {
             this.allPlaces = places;
             this.visiblePlaces = this.filterPlaces(this.filterBy);
         });
     }
 
-    filterPlaces(filter) {
+    filterPlaces(filter: string): Place[] {
         if (filter === '') {
             return this.allPlaces;
         }
@@ -44,7 +44,7 @@ export class PlacesComponent implements OnInit {
         return this.allPlaces.filter(p => p.category === filter);
     }
 
-    orderPlaces(order) {
+    orderPlaces(order): void {
         if (order === 'all') {
             this.visiblePlaces = this.allPlaces.slice();
         } else {
@@ -52,16 +52,14 @@ export class PlacesComponent implements OnInit {
                 return this.compareFunction(x[order], y[order]);
             });
         }
-
-        return this.visiblePlaces;
     }
 
-    getSelectedOrder(event) {
+    getSelectedOrder(event): void {
         this.orderBy = event.target.value;
         this.orderPlaces(this.orderBy);
     }
 
-    getSelectedCategory(event) {
+    getSelectedCategory(event): void {
         this.filterBy = event.target.value;
         this.visiblePlaces = this.filterPlaces(this.filterBy);
     }

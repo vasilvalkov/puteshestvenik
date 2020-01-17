@@ -1,7 +1,8 @@
-import { Place } from './../places/place.model';
-import { FirebaseListObservable } from 'angularfire2/database';
-import { PlaceService } from './../places/shared/place.service';
 import { Component, OnInit } from '@angular/core';
+
+import { Place } from './../places/place.model';
+import { PlaceService } from './../places/shared/place.service';
+
 
 @Component({
     templateUrl: './home.component.html',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
     constructor(private placeService: PlaceService) { }
 
     ngOnInit() {
-        this.placeService.getPlaces().subscribe(places => {
+        this.placeService.getPlaces().valueChanges().subscribe(places => {
             this.places = places;
             this.topPlaces = this.places
                 .slice()
