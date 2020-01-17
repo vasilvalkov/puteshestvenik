@@ -8,7 +8,7 @@ export interface Category {
 }
 
 export interface Place {
-    $key: string;
+    id: string;
     heading: string;
     imageUrl: string;
     thumbUrl: string;
@@ -18,4 +18,5 @@ export interface Place {
     bodyText: string;
     voters: string[];
     comments: Comment[];
+    map: string;
 }

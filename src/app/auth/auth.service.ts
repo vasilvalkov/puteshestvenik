@@ -1,41 +1,51 @@
-import { Injectable, OnInit } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { Injectable, OnInit, OnDestroy } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 import { User as FbUser } from 'firebase/app';
 
+
 @Injectable()
-export class AuthService implements OnInit {
+export class AuthService implements OnDestroy {
 
     authState: FbUser = null;
     currentUser: Observable<FbUser>;
 
-    ngOnInit(): void {
-        this.afAuth.authState.subscribe((auth) => {
-            this.authState = auth;
-        });
-    }
+    private subs = new Subscription();
 
-    constructor(private afAuth: AngularFireAuth,
+    constructor(
+        private afAuth: AngularFireAuth,
         private db: AngularFireDatabase,
-        private router: Router) {
-        this.currentUser = afAuth.authState;
+        private router: Router
+    ) { }
+
+    secureApp(): void {
+        this.currentUser = this.afAuth.authState;
+        this.subs.add(
+            this.afAuth.user.subscribe((user) => {
+                this.authState = user;
+            })
+        );
     }
 
-    createUserWithEmailAndPassword(email: string, pass: string) {
+    ngOnDestroy() {
+        this.subs.unsubscribe();
+    }
+
+    createUserWithEmailAndPassword(email: string, pass: string): Promise<void> {
         return this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
-            .then((user) => {
-                this.authState = user;
+            .then((res) => {
+                this.authState = res.user;
             })
             .catch(error => console.log(error));
     }
 
-    login(email: string, password: string) {
+    login(email: string, password: string): Promise<firebase.auth.UserCredential> {
         return this.afAuth.auth.signInWithEmailAndPassword(email, password);
     }
 
-    logout() {
+    logout(): Promise<void> {
         return this.afAuth.auth.signOut();
     }
 

@@ -1,4 +1,4 @@
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { AuthService } from './../../auth/auth.service';
 import { User } from './../user.model';
@@ -16,7 +16,7 @@ export class UserService {
             if (user) {
                 let userDataFromDb;
 
-                this.db.object(`users/${user.uid}`).subscribe(data => {
+                this.db.object(`users/${user.uid}`).valueChanges().subscribe(data => {
                     userDataFromDb = data;
                 });
 

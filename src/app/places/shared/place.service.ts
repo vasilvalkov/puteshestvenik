@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject, } from '@angular/fire/database';
 
 import { Category, Place } from '../place.model';
-import { FileUploadService } from './../../common/fileUpload.service';
 
 @Injectable()
-export class PlaceService  {
-    places: FirebaseListObservable<Place[]>;
+export class PlaceService {
+    places: AngularFireList<Place>;
 
     constructor(private db: AngularFireDatabase) {
         this.places = this.db.list('/places');
     }
 
-    getPlaces() {
+    getPlaces(): AngularFireList<Place> {
         return this.places;
     }
 
-    getPlace(id: string) {
+    getPlace(id: string): AngularFireObject<Place> {
         return this.db.object('/places/' + id);
     }
 
@@ -37,16 +36,16 @@ export class PlaceService  {
         return this.places.push(place);
     }
 
-    updatePlace(key: string, updatedFields: {}) {
+    updatePlace(key: string, updatedFields: {}): void {
         this.places.update(key, updatedFields)
             .catch(error => this.handleError(error));
     }
 
-    getCategories(): FirebaseListObservable<Category[]> {
-        return <FirebaseListObservable<Category[]>>this.db.list('/categories');
+    getCategories(): AngularFireList<Category> {
+        return <AngularFireList<Category>>this.db.list('/categories');
     }
 
-    handleError(error) {
+    handleError(error): void {
         console.log(error);
     }
 }

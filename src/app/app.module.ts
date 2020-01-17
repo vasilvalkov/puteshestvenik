@@ -5,9 +5,10 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { registerLocaleData } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,10 @@ import { PlacesModule } from './places/places.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './user/shared/user.service';
+import localeBg from '@angular/common/locales/bg';
+
+
+registerLocaleData(localeBg);
 
 @NgModule({
   declarations: [
@@ -27,10 +32,10 @@ import { UserService } from './user/shared/user.service';
     NavbarComponent,
     LoginComponent,
     RegisterComponent
-],
+  ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase, 'puteshestvenik'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     PlacesModule,
@@ -41,7 +46,10 @@ import { UserService } from './user/shared/user.service';
     AuthRoutingModule,
     AppRoutingModule
   ],
-  providers: [FileUploadService, AuthService, UserService, { provide: LOCALE_ID, useValue: 'bg-BG' }],
+  providers: [FileUploadService, AuthService, UserService,
+  {
+    provide: LOCALE_ID, useValue: 'bg-BG'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

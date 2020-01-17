@@ -1,8 +1,9 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Router } from '@angular/router';
 import { User } from './../user/user.model';
 import { UserService } from './../user/shared/user.service';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './register.component.html',
@@ -38,6 +39,10 @@ export class RegisterComponent implements OnInit {
 
     resetForm() {
         this.registerForm.reset();
+    }
+
+    cancelRegistration() {
+        this.resetForm();
         this.router.navigate(['/']);
     }
 }

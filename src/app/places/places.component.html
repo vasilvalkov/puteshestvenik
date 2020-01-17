@@ -5,14 +5,14 @@
             <div class="col-lg-6">
                 <select class="form-control" id="selectCategory" (change)="getSelectedCategory($event)">
                     <option value="" selected>Всички</option>
-                    <option value="{{ category.name }}" *ngFor="let category of categories | async">{{ category.name }}</option>
+                    <option value="{{ category.name }}" *ngFor="let category of categories|async">{{ category.name }}</option>
                 </select>
             </div>
         </div>
         <div class="form-group col-sm-6">
-            <label for="selectCategory" class="col-lg-6 control-label">Подреди по:</label>
+            <label for="selectOrder" class="col-lg-6 control-label">Подреди по:</label>
             <div class="col-lg-6">
-                <select class="form-control" id="selectCategory" (change)="getSelectedOrder($event)">
+                <select class="form-control" id="selectOrder" (change)="getSelectedOrder($event)">
                     <option value="all" selected>Без подредба</option>
                     <option value="rating">Оценка</option>
                     <option value="heading">Име</option>
@@ -23,6 +23,6 @@
 </form>
 <div class="row">
     <div class="col-sm-3 pull-left" *ngFor="let place of visiblePlaces">
-        <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl" [routerLink]="['/places', place.$key]"></app-place-thumbnail>
+        <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl" [routerLink]="['/places', place.id]"></app-place-thumbnail>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireList } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 
@@ -14,7 +14,7 @@ import { Upload } from './../../common/upload';
     styleUrls: ['./place-edit.component.css']
 })
 export class PlaceEditComponent implements OnInit {
-    categories: FirebaseListObservable<Category[]>;
+    categories: AngularFireList<Category>;
     initialPlace: Place;
     createPlaceForm: FormGroup;
     currentUpload: Upload;
@@ -59,7 +59,7 @@ export class PlaceEditComponent implements OnInit {
 
                 const newPlace = Object.assign({}, this.initialPlace, place);
 
-                if (!newPlace.$key) {
+                if (!newPlace.id) {
                     return this.createPlace(newPlace);
                 }
 

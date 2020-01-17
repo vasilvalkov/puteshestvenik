@@ -1,4 +1,4 @@
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
@@ -7,11 +7,11 @@ import { Upload } from './upload';
 @Injectable()
 export class FileUploadService {
 
-    constructor(private db: AngularFireDatabase) { }
-
+    uploads: any;
     private basePath = '/places';
     private uploadTask: firebase.storage.UploadTask;
-    uploads: any;
+
+    constructor(private db: AngularFireDatabase) { }
 
     pushUpload(upload: Upload) {
         const storageRef = firebase.storage().ref();
@@ -29,9 +29,12 @@ export class FileUploadService {
             },
             () => {
                 // upload success
-                upload.url = this.uploadTask.snapshot.downloadURL;
-                upload.name = upload.file.name;
-                this.uploads = upload;
+                storageRef.getDownloadURL().then((url: string) => {
+                    upload.url = url;
+                    upload.name = upload.file.name;
+                    this.uploads = upload;
+                });
+
             }
         );
     }

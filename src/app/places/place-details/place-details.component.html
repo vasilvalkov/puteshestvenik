@@ -1,36 +1,36 @@
-<div class="row">
+<div class="row" *ngIf="place|async as plc">
     <section class="col-sm-3">
-        <img class="img-responsive" src="{{ place?.thumbUrl }}" alt="{{ place?.heading }}">
+        <img class="img-responsive" src="{{ plc.thumbUrl }}" alt="{{ plc.heading }}">
         <article class="panel panel-default">
             <div class="panel-body">
                 <div>
                     Оценка:
-                    <app-star-rating [rating]="place?.rating" [topRating]="5"></app-star-rating>
+                    <app-star-rating [rating]="plc.rating" [topRating]="5"></app-star-rating>
                 </div>
-                <div>Категория: {{ place?.category }}</div>
-                <div>GPS: <span *ngIf="place?.location">{{ place?.location?.latitude }}, {{ place?.location?.longitude }}</span></div>
+                <div>Категория: {{ plc.category }}</div>
+                <div>GPS: <span *ngIf="plc.location">{{ plc.location.latitude }}, {{ plc.location.longitude }}</span></div>
             </div>
         </article>
     </section>
     <section class="col-sm-6">
-        <h3>{{ place?.heading }}</h3>
+        <h3>{{ plc.heading }}</h3>
         <hr>
         <ul class="nav nav-tabs">
             <li class="active"><a href="#description" data-toggle="tab" aria-expanded="true">Описание</a></li>
             <li class=""><a href="#map" data-toggle="tab" aria-expanded="false">Карта</a></li>
-            <li class=""><a href="#comments" data-toggle="tab" aria-expanded="false">Коментари <span class="badge">{{place?.comments?.length}}</span></a></li>
+            <li class=""><a href="#comments" data-toggle="tab" aria-expanded="false">Коментари <span class="badge">{{plc.comments?.length}}</span></a></li>
         </ul>
         <div id="tabContent" class="tab-content">
             <div class="tab-pane fade active in" id="description">
-                <p>{{ place?.bodyText }}</p>
+                <p>{{ plc.bodyText }}</p>
             </div>
             <div class="tab-pane fade" id="map">
                 <img src="https://maps.googleapis.com/maps/api/staticmap?center&zoom=13&size=555x373&maptype=roadmap
-                &markers=color:blue%7Clabel:S%7C{{place?.location?.latitude}},{{place?.location?.longitude}}&key=AIzaSyAWUxEBDtca3Y9X_rdnOONWQBbDblAekp8" alt="">
+                &markers=color:blue%7Clabel:S%7C{{plc.location.latitude}},{{plc.location.longitude}}&key=AIzaSyAWUxEBDtca3Y9X_rdnOONWQBbDblAekp8" alt="">
             </div>
             <div class="tab-pane fade" id="comments">
-                <p class="text-center" *ngIf="place?.comments?.length === 0 || !place?.comments">Все още няма коментари за това място.</p>
-                <app-comment *ngFor="let comment of place?.comments" [commentData]="comment"></app-comment>
+                <p class="text-center" *ngIf="plc.comments?.length === 0 || !plc.comments">Все още няма коментари за това място.</p>
+                <app-comment *ngFor="let comment of plc.comments" [commentData]="comment"></app-comment>
             </div>
         </div>
     </section>
