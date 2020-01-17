@@ -1,5 +1,5 @@
 export class Upload {
-    $key: string;
+    id: number;
     file: File;
     name: string;
     url: string;

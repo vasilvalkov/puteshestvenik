@@ -52,7 +52,7 @@
             </div>
             <div class="modal-body">
                 <div class="list-group">
-                    <a (click)="closeModal(result.$key)" class="list-group-item" *ngFor="let result of foundPlaces">
+                    <a (click)="closeModal(result.id)" class="list-group-item" *ngFor="let result of foundPlaces">
                         <h4 class="list-group-item-heading">{{ result.heading }}</h4>
                         <p class="list-group-item-text">{{ result.bodyText }}</p>
                     </a>

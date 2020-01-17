@@ -8,7 +8,7 @@
         <div id="carouselControls" class="carousel slide" data-ride="carousel" data-interval="4000">
             <div class="carousel-inner" align="center" role="listbox">
                 <div class="item" [ngClass]="{ 'active' : i == 0}" *ngFor="let place of places; let i = index">
-                    <a [routerLink]="['/places', place.$key]">
+                    <a [routerLink]="['/places', place.id]">
                         <img class="img-responsive d-block img-fluid" src="{{place?.imageUrl}}" alt="First slide" width="100%">
                         <div class="carousel-caption d-none d-md-block">
                             <h3>{{place?.heading}}</h3>
@@ -24,7 +24,7 @@
     <h3>Най-харесвани</h3>
     <div class="row">
         <div class="col-sm-3 pull-left" *ngFor="let place of topPlaces; let i=index">
-            <app-place-thumbnail *ngIf="i < 4" [heading]="place?.heading" [imageUrl]="place?.thumbUrl" [routerLink]="['/places', place.$key]"></app-place-thumbnail>
+            <app-place-thumbnail *ngIf="i < 4" [heading]="place?.heading" [imageUrl]="place?.thumbUrl" [routerLink]="['/places', place.id]"></app-place-thumbnail>
         </div>
     </div>
 </section>
