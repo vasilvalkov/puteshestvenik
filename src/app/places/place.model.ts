@@ -8,7 +8,7 @@ export interface Category {
 }
 
 export interface Place {
-    id: string;
+    id: number;
     heading: string;
     imageUrl: string;
     thumbUrl: string;
