@@ -1,17 +1,17 @@
-import { AuthGuardService } from './auth-guard.service';
-import { ProfileComponent } from './../user/profile/profile.component';
-import { PlaceEditComponent } from './../places/place-edit/place-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { AuthGuardService } from '../core/auth/auth-guard.service';
+import { ProfileComponent } from './profile/profile.component';
+
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
-                path: 'auth',
+                path: '',
                 canActivate: [AuthGuardService],
                 children: [
-                    { path: 'create-place', component: PlaceEditComponent },
                     { path: 'profile', component: ProfileComponent }
                 ]
             }
@@ -19,4 +19,4 @@ import { RouterModule } from '@angular/router';
     ],
     exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class UserRoutingModule { }

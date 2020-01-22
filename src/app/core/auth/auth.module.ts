@@ -1,17 +1,19 @@
 import { AuthGuardService } from './auth-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthComponent } from './auth.component';
+
+import { AuthService } from './auth.service';
+import { UserLoggedGuardService } from './user-logged-guard.service';
+
 
 @NgModule({
     imports: [
         CommonModule
     ],
-    declarations: [
-        AuthComponent
-    ],
     providers: [
-        AuthGuardService
+        AuthGuardService,
+        AuthService,
+        UserLoggedGuardService
     ]
 })
 export class AuthModule { }

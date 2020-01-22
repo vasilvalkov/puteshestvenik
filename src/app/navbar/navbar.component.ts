@@ -1,49 +1,55 @@
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './../auth/auth.service';
+import { Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { AuthService } from '../core/auth/auth.service';
 import { Place } from './../places/place.model';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { PlaceService } from './../places/shared/place.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from 'bootstrap';
 import { User as FbUser } from 'firebase/app';
+import { PlaceService } from '../core/place/place.service';
+
 
 declare var $: any;
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.css']
+    styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
-    searchQueryString: string;
-    currentUser: FbUser;
+export class NavbarComponent implements OnInit, OnDestroy {
+
     @Output() queryResult = new EventEmitter();
+    searchQueryString: string;
+    currentUser: Observable<FbUser>;
     foundPlaces: Place[] = [];
 
-    places: AngularFireList<Place>;
+    places: Observable<Place[]>;
     allPlaces: Place[] = [];
 
-    constructor(private placeService: PlaceService,
-        public authService: AuthService,
-        private router: Router,
-        private db: AngularFireDatabase) { }
+    private subs = new Subscription();
+
+    constructor(
+        private placeService: PlaceService,
+        private authService: AuthService,
+        private router: Router
+    ) { }
 
     ngOnInit() {
         this.places = this.placeService.getPlaces();
-        this.places.valueChanges().subscribe(places => {
-            this.allPlaces = places;
-        });
-        this.authService.currentUser.subscribe(user => {
-            if (user) {
-                this.db.object(`users/${user.uid}`).valueChanges().subscribe(data => {
-                    const updatedUser = Object.assign({}, data, user);
-                    this.currentUser = updatedUser;
-                });
-            }
-        });
+        this.currentUser = this.authService.currentUser;
+
+        this.subs.add(
+            this.places.subscribe(places => {
+                this.allPlaces = places;
+            })
+        );
     }
 
-    search(query) {
+    ngOnDestroy() {
+        this.subs.unsubscribe();
+    }
+
+    search(query): void {
         this.searchQueryString = query;
 
         this.foundPlaces = this.allPlaces.filter(p => {
@@ -55,15 +61,12 @@ export class NavbarComponent implements OnInit {
         $('#modal').modal('show');
     }
 
-    closeModal(param) {
+    closeModal(param): void {
         $('#modal').modal('toggle');
         this.router.navigate(['/places', param]);
     }
 
-    logout() {
-        this.authService.logout()
-            .then(() => {
-                this.router.navigate(['/places']);
-            });
+    logout(): void {
+        this.authService.logout();
     }
 }

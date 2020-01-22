@@ -1,26 +1,20 @@
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AuthRoutingModule } from './auth/auth-routing.module';
-import { AuthService } from './auth/auth.service';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, APP_BASE_HREF } from '@angular/common';
+
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import localeBg from '@angular/common/locales/bg';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from '../environments/environment';
-import { FileUploadService } from './common/fileUpload.service';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PlacesModule } from './places/places.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { UserService } from './user/shared/user.service';
-import localeBg from '@angular/common/locales/bg';
+import { AppConstantInjectionToken } from './app.constants.injection';
+import { APP_CONSTANTS } from './app.constants';
 
 
 registerLocaleData(localeBg);
@@ -35,21 +29,17 @@ registerLocaleData(localeBg);
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase, 'puteshestvenik'),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    PlacesModule,
     ReactiveFormsModule,
     FormsModule,
-    UserModule,
-    AuthModule,
-    AuthRoutingModule,
+    CoreModule,
+    SharedModule,
     AppRoutingModule
   ],
-  providers: [FileUploadService, AuthService, UserService,
-  {
-    provide: LOCALE_ID, useValue: 'bg-BG'
-  }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'bg-BG' },
+    { provide: AppConstantInjectionToken, useValue: APP_CONSTANTS },
+    { provide: APP_BASE_HREF, useValue: '/' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

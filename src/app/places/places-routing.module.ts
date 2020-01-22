@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { PlacesComponent } from './places.component';
 import { PlaceDetailsComponent } from './place-details/place-details.component';
-// import { PlaceEditComponent } from './place-edit/place-edit.component';
+import { PlaceEditComponent } from './place-edit/place-edit.component';
+
+
+const placeRoutes: Routes = [
+    { path: ':id', component: PlaceDetailsComponent },
+    { path: 'create', component: PlaceEditComponent },
+    { path: '', component: PlacesComponent },
+];
+
 
 @NgModule({
-    imports: [
-        RouterModule.forChild([
-            { path: 'places', component: PlacesComponent },
-            // { path: 'places/create', component: PlaceEditComponent},
-            { path: 'places/:id', component: PlaceDetailsComponent }
-        ])
-    ],
+    imports: [RouterModule.forChild(placeRoutes)],
     exports: [RouterModule]
 })
 export class PlacesRoutingModule { }

@@ -2,19 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireList } from '@angular/fire/database';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
 
-import { FileUploadService } from './../../common/fileUpload.service';
-import { PlaceService } from './../shared/place.service';
+import { FileUploadService } from '../../core/utils/fileUpload.service';
+import { PlaceService } from '../../core/place/place.service';
 import { Category, Place } from '../place.model';
-import { Upload } from './../../common/upload';
+import { Upload } from '../../core/utils/upload';
 
 @Component({
     templateUrl: './place-edit.component.html',
-    styleUrls: ['./place-edit.component.css']
+    styleUrls: ['./place-edit.component.scss']
 })
 export class PlaceEditComponent implements OnInit {
-    categories: AngularFireList<Category>;
+    categories: Observable<Category[]>;
     initialPlace: Place;
     createPlaceForm: FormGroup;
     currentUpload: Upload;

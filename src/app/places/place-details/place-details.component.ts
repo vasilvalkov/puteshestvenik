@@ -2,13 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 
-import { PlaceService } from '../shared/place.service';
 import { Place } from '../place.model';
+import { PlaceService } from '../../core/place/place.service';
 
 
 @Component({
     templateUrl: './place-details.component.html',
-    styleUrls: ['./place-details.component.css']
+    styleUrls: ['./place-details.component.scss']
 })
 export class PlaceDetailsComponent implements OnInit, OnDestroy {
 

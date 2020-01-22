@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Place } from './../places/place.model';
-import { PlaceService } from './../places/shared/place.service';
+import { PlaceService } from '../core/place/place.service';
 
 
 @Component({
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     constructor(private placeService: PlaceService) { }
 
     ngOnInit() {
-        this.placeService.getPlaces().valueChanges().subscribe(places => {
+        this.placeService.getPlaces().subscribe(places => {
             this.places = places;
             this.topPlaces = this.places
                 .slice()

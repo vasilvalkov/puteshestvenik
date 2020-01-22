@@ -1,6 +1,6 @@
 <h3 class="col-sm-offset-1">Регистрация</h3>
 <section class="margin-top-40">
-    <form [formGroup]="registerForm" class="form-horizontal" (ngSubmit)="register(registerForm.value)" novalidate>
+    <form [formGroup]="registerForm" class="form-horizontal" novalidate>
         <section class="col-sm-11">
             <div class="form-group" [ngClass]="{ 'has-error': registerForm.get('username').touched && registerForm.get('username').invalid}">
                 <label for="inputUsername" class="col-lg-2 control-label">Потребителско име</label>
@@ -76,7 +76,7 @@
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-danger" (click)="cancelRegistration()">Отмени</button>
                     <button type="reset" class="btn btn-default" (click)="resetForm()">Започни отначало</button>
-                    <button style="float: right" type="submit" class="btn btn-primary">Създай профил</button>
+                    <button style="float: right" type="button" class="btn btn-primary" (click)="register(registerForm.value)">Създай профил</button>
                 </div>
             </div>
         </section>

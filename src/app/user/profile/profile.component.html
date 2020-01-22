@@ -1,49 +1,53 @@
-<h3 class="col-sm-offset-1">Профилът на {{ currentUser?.firstName + ' ' + currentUser?.lastName}}</h3>
-<section class="row margin-top-40">
-    <section class="col-sm-2">
-        <img class="img-responsive" src="{{ currentUser?.photoURL }}" alt="" width="100%">
-    </section>
-    <section class="col-sm-10">
-        <div class="row">
-            <div class="col-lg-2 text-right"><strong>Потребителско име</strong></div>
-            <div class="col-lg-5">{{ currentUser?.username }}</div>
-        </div>
-        <div class="row">
-            <div class="col-lg-2 text-right"><strong>Име</strong></div>
-            <div class="col-lg-5">{{ currentUser?.firstName }}</div>
-        </div>
-        <div class="row">
-            <div class="col-lg-2 text-right"><strong>Фамилия</strong></div>
-            <div class="col-lg-5">{{ currentUser?.lastName }}</div>
-        </div>
-        <div class="row">
-            <div class="col-lg-2 text-right"><strong>e-mail</strong></div>
-            <div class="col-lg-5">{{ currentUser?.email }}</div>
-        </div>
-        <div class="row margin-top-40">
-            <div class="col-lg-offset-2">
-                <a [routerLink]="['/auth/create-place']" class="btn btn-primary btn-md">Добави твое място</a>
+<ng-container *ngIf="currentUser; else nouser">
+    <h3 class="col-sm-offset-1">Профилът на {{ currentUser.firstName + ' ' + currentUser.lastName}}</h3>
+    <section class="row margin-top-40">
+        <section class="col-sm-2">
+            <img class="img-responsive" src="{{ currentUser.photoURL }}" alt="" width="100%">
+        </section>
+        <section class="col-sm-10">
+            <div class="row">
+                <div class="col-xs-6 col-lg-2 text-right"><strong>Потребителско име</strong></div>
+                <div class="col-lg-5">{{ currentUser.username }}</div>
             </div>
-        </div>
-        <!-- <div class="form-group">
-                <label for="inputImage" class="col-lg-2 control-label">Снимка</label>
-                <div class="col-lg-10">
-                    <input class="form-control" id="inputImage" placeholder="Избери снимка" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-                        type="file" (change)="detectFiles($event)">
-                    <div *ngIf="currentUpload">
-                        <div class="progress">
-                            <div class="progress-bar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+            <div class="row">
+                <div class="col-xs-6 col-lg-2 text-right"><strong>Име</strong></div>
+                <div class="col-lg-5">{{ currentUser.firstName }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-lg-2 text-right"><strong>Фамилия</strong></div>
+                <div class="col-lg-5">{{ currentUser.lastName }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-lg-2 text-right"><strong>e-mail</strong></div>
+                <div class="col-lg-5">{{ currentUser.email }}</div>
+            </div>
+            <div class="row margin-top-40">
+                <div class="col-lg-offset-2">
+                    <a [routerLink]="['/places/create']" class="btn btn-primary btn-md">Добави твое място</a>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                    <label for="inputImage" class="col-lg-2 control-label">Снимка</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="inputImage" placeholder="Избери снимка" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
+                            type="file" (change)="detectFiles($event)">
+                        <div *ngIf="currentUpload">
+                            <div class="progress">
+                                <div class="progress-bar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                            </div>
+                            {{ currentUpload?.progress | number:'1.0-2' }}% завършени
                         </div>
-                        {{ currentUpload?.progress | number:'1.0-2' }}% завършени
+                        <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="uploadPicture()">Качи снимка</button>
                     </div>
-                    <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="uploadPicture()">Качи снимка</button>
+                </div> -->
+            <!-- <div class="form-group margin-top-40">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default" (click)="resetForm()">Отмени</button>
+                    <button type="submit" class="btn btn-primary">Създай профил</button>
                 </div>
             </div> -->
-        <!-- <div class="form-group margin-top-40">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default" (click)="resetForm()">Отмени</button>
-                <button type="submit" class="btn btn-primary">Създай профил</button>
-            </div>
-        </div> -->
+        </section>
     </section>
-</section>
+</ng-container>
+
+<ng-template #nouser>No user</ng-template>

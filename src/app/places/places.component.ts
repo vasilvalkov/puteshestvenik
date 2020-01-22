@@ -1,12 +1,12 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Place, Category } from './place.model';
-import { PlaceService } from './shared/place.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PlaceService } from '../core/place/place.service';
 
 @Component({
     templateUrl: './places.component.html',
-    styleUrls: ['./places.component.css']
+    styleUrls: ['./places.component.scss']
 })
 export class PlacesComponent implements OnInit {
 
@@ -24,13 +24,13 @@ export class PlacesComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.categories = this.placeService.getCategories().valueChanges();
+        this.categories = this.placeService.getCategories();
 
         this.filterForm = this.builder.group({
             categoryName: 'Категория'
         });
 
-        this.placeService.getPlaces().valueChanges().subscribe(places => {
+        this.placeService.getPlaces().subscribe(places => {
             this.allPlaces = places;
             this.visiblePlaces = this.filterPlaces(this.filterBy);
         });
