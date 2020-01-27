@@ -1,4 +1,4 @@
 <article class="panel panel-default">
-    <div class="panel-heading">{{heading}}</div>
-    <div class="panel-body" [style.background-image]="'url(' + imageUrl + ')'"></div>
+    <div class="panel-heading" data-toggle="tooltip" data-placement="top" [title]="heading" [attr.data-original-title]="heading">{{heading}}</div>
+    <div class="panel-body" [style.background-image]="backgroundUrl"></div>
 </article>

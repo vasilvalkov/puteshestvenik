@@ -1,6 +1,10 @@
+import { Component, OnInit, Inject } from '@angular/core';
+
+import { AppConstants } from './../../app.constants.injection';
 import { AuthService } from '../../core/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
+import { AppConstantInjectionToken } from '../../app.constants.injection';
+
 
 @Component({
     templateUrl: './profile.component.html',
@@ -9,11 +13,16 @@ import { User } from '../user.model';
 export class ProfileComponent implements OnInit {
 
     currentUser: User;
+    createPlaceRotue: string;
 
-    constructor(public authService: AuthService) { }
+    constructor(
+        public authService: AuthService,
+        @Inject(AppConstantInjectionToken) private app_constants: AppConstants
+    ) { }
 
     ngOnInit() {
         this.currentUser = this.authService.userInfo;
+        this.createPlaceRotue = `/${this.app_constants.routes.PLACE_CREATE}`;
     }
 
 }

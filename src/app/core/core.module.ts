@@ -1,14 +1,15 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 
 import { FileUploadService } from './utils/fileUpload.service';
 import { AuthModule } from './auth/auth.module';
 import { PlaceService } from './place/place.service';
 import { UserService } from './user/user.service';
-import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../environments/environment';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 
 @NgModule({
@@ -18,12 +19,14 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AuthModule,
     AngularFireModule.initializeApp(environment.firebase, 'puteshestvenik'),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
     FileUploadService,
     PlaceService,
-    UserService
+    UserService,
+    { provide: StorageBucket, useValue: environment.firebase.storageBucket }
   ]
 })
 export class CoreModule {

@@ -1,0 +1,22 @@
+<section>
+    <img class="img-responsive" src="{{ place.thumbUrl }}" alt="{{ place.heading }}">
+    <article class="panel panel-default">
+        <div class="panel-body">
+            <div>
+                 Оценка:
+                <app-star-rating [rating]="place.rating" [topRating]="5"></app-star-rating>
+            </div>
+            <div>Категория: {{ place.category }}</div>
+            <div>
+                <span>GPS: </span>
+                <ng-container *ngIf="place.location; else nogps">
+                    <span>{{ place.location.latitude }}, {{ place.location.longitude }}</span>
+                </ng-container>
+            </div>
+        </div>
+     </article>
+</section>
+
+<ng-template #nogps>
+    <span>Няма посочени</span>
+</ng-template>

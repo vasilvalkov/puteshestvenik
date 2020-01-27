@@ -1,8 +1,13 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Place, Category } from './place.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+import { Place, Category } from './place.model';
 import { PlaceService } from '../core/place/place.service';
+
+
+type PlaceOrders = 'all' | 'rating' | 'heading';
 
 @Component({
     templateUrl: './places.component.html',
@@ -13,9 +18,10 @@ export class PlacesComponent implements OnInit {
     categories: Observable<Category[]>;
     filterForm: FormGroup;
     visiblePlaces: Place[] = [];
+    loading = true;
 
     private filterBy = '';
-    private orderBy = '';
+    private orderBy: PlaceOrders = 'all';
     private allPlaces: Place[];
 
     constructor(
@@ -26,14 +32,8 @@ export class PlacesComponent implements OnInit {
     ngOnInit(): void {
         this.categories = this.placeService.getCategories();
 
-        this.filterForm = this.builder.group({
-            categoryName: 'Категория'
-        });
-
-        this.placeService.getPlaces().subscribe(places => {
-            this.allPlaces = places;
-            this.visiblePlaces = this.filterPlaces(this.filterBy);
-        });
+        this.buildForm();
+        this.fetchPlaces();
     }
 
     filterPlaces(filter: string): Place[] {
@@ -44,7 +44,7 @@ export class PlacesComponent implements OnInit {
         return this.allPlaces.filter(p => p.category === filter);
     }
 
-    orderPlaces(order): void {
+    orderPlaces(order: PlaceOrders): void {
         if (order === 'all') {
             this.visiblePlaces = this.allPlaces.slice();
         } else {
@@ -76,5 +76,21 @@ export class PlacesComponent implements OnInit {
         }
 
         return a.localeCompare(b);
+    }
+
+    private fetchPlaces() {
+        this.placeService.getPlaces()
+            .pipe(take(1))
+            .subscribe(places => {
+                this.allPlaces = places;
+                this.visiblePlaces = this.filterPlaces(this.filterBy);
+                this.loading = false;
+            });
+    }
+
+    private buildForm() {
+        this.filterForm = this.builder.group({
+            categoryName: 'Категория'
+        });
     }
 }

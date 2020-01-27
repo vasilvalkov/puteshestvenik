@@ -1,7 +1,18 @@
-app-place-thumbnail {
-    display: inline-block;
+.places-container {
+  position: relative;
 }
 
-app-place-thumbnail:hover {
-    cursor: pointer;
+.progress-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10em;
+}
+
+.progress {
+  height: 2em;
+  width: 40%;
+
+  .progress-bar {
+    width: 100%;
+  }
 }

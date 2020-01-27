@@ -1,15 +1,19 @@
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
+import { AppConstantInjectionToken, AppConstants } from './../../app.constants.injection';
 import { Category, Place } from '../../places/place.model';
 
 @Injectable()
 export class PlaceService {
     places: AngularFireList<Place>;
 
-    constructor(private db: AngularFireDatabase) {
-        this.places = this.db.list('/places');
+    constructor(
+        private db: AngularFireDatabase,
+        @Inject(AppConstantInjectionToken) private app_constants: AppConstants
+    ) {
+        this.places = this.db.list(app_constants.storageRefs.PLACES);
     }
 
     getPlaces(): Observable<Place[]> {
@@ -17,7 +21,7 @@ export class PlaceService {
     }
 
     getPlace(id: string): AngularFireObject<Place> {
-        return this.db.object('/places/' + id);
+        return this.db.object(`${this.app_constants.storageRefs.PLACES}/${id}`);
     }
 
     initializePlace(): Place {
@@ -43,7 +47,7 @@ export class PlaceService {
     }
 
     getCategories(): Observable<Category[]> {
-        return this.db.list<Category>('/categories').valueChanges();
+        return this.db.list<Category>(this.app_constants.storageRefs.CATEGORIES).valueChanges();
     }
 
     handleError(error): void {

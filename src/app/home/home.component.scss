@@ -1,13 +1,5 @@
+@import '../../styles.scss';
+
 .carousel p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-app-place-thumbnail {
-    display: inline-block;
-}
-
-app-place-thumbnail:hover {
-    cursor: pointer;
+   @include overflow-ellipsis;
 }

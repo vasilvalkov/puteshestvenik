@@ -1,27 +1,27 @@
 <h3 class="col-sm-offset-1">Вход</h3>
 <section class="margin-top-40">
-<form [formGroup]="loginForm" class="form-horizontal" (ngSubmit)="loginUser(loginForm.value)" novalidate>
+<form [formGroup]="loginForm" class="form-horizontal" novalidate>
     <div class="col-sm-offset-1">
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': loginForm.get('email').touched && loginForm.get('email').invalid}">
+    <div class="form-group" [ngClass]="{ 'has-error': isInvalid('email')}">
         <label for="inputEmail" class="col-lg-2 control-label">Email</label>
         <div class="col-lg-5">
             <input type="text" formControlName="email" class="form-control" id="inputEmail" placeholder="Email">
-            <span class="text-danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors?.required">Моля, въведете email!</span>
-            <span class="text-danger" *ngIf="loginForm.get('email').touched && loginForm.get('email').errors?.pattern">Невалиден e-mail!</span>
+            <span class="text-danger" *ngIf="hasError('email', 'required')">Моля, въведете email!</span>
+            <span class="text-danger" *ngIf="hasError('email', 'pattern')">Невалиден e-mail!</span>
         </div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': loginForm.get('password').touched && loginForm.get('password').invalid}">
+    <div class="form-group" [ngClass]="{ 'has-error': isInvalid('password')}">
         <label for="inputPassword" class="col-lg-2 control-label">Парола</label>
         <div class="col-lg-5">
             <input type="password" formControlName="password" class="form-control" id="inputPassword" placeholder="Парола">
-            <span class="text-danger" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors?.required">Моля, въведете парола!</span>
-            <span class="text-danger" *ngIf="loginForm.get('password').touched && loginForm.get('password').errors?.minlength">Паролата трябва да е поне 6 символа!</span>
+            <span class="text-danger" *ngIf="hasError('password', 'required')">Моля, въведете парола!</span>
+            <span class="text-danger" *ngIf="hasError('password', 'minlength')">Паролата трябва да е поне {{passwordMinLength}} символа!</span>
         </div>
     </div>
     <div class="form-group margin-top-80">
         <div class="col-lg-10 col-lg-offset-2">
-            <button type="submit" class="btn btn-primary margin-top-40">Влез</button>
+            <button type="button" class="btn btn-primary margin-top-40" (click)="onLoginUser(loginForm.value)">Влез</button>
         </div>
     </div>
 </form>

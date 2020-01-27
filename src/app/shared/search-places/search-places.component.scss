@@ -1,0 +1,13 @@
+.list-group-item-text {
+  text-overflow: ellipsis;
+}
+
+.modal-body {
+  min-height: 50px;
+}
+
+a p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}

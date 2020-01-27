@@ -1,22 +1,21 @@
 <h3 class="col-sm-offset-1">Добави дестинация</h3>
 <section>
-    <form [formGroup]="createPlaceForm" class="form-horizontal" (ngSubmit)="savePlace(createPlaceForm.value)" novalidate>
+    <form [formGroup]="createPlaceForm" class="form-horizontal" novalidate>
         <section class="col-sm-11">
-            <div class="form-group" [ngClass]="{ 'has-error': createPlaceForm.get('heading').touched && createPlaceForm.get('heading').invalid}">
+            <div class="form-group" [ngClass]="{ 'has-error': isInvalid('heading')}">
                 <label for="inputHeading" class="col-lg-2 control-label">Заглавие</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="inputHeading" placeholder="Заглавие" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-                        type="text" formControlName="heading">
-                    <span class="text-danger" *ngIf="createPlaceForm.get('heading').touched && createPlaceForm.get('heading').errors?.required">Моля, въведете заглавие!</span>
-                    <span class="text-danger" *ngIf="createPlaceForm.get('heading').touched && createPlaceForm.get('heading').errors?.minlength">Заглавието трябва да е поне 3 символа!</span>
+                    <input class="form-control" id="inputHeading" placeholder="Заглавие" type="text" formControlName="heading">
+                    <span class="text-danger" *ngIf="hasError('heading', 'required')">Моля, въведете заглавие!</span>
+                    <span class="text-danger" *ngIf="hasError('heading', 'minlength')">Заглавието трябва да е поне {{ headingMinLength }} символа!</span>
                 </div>
             </div>
-            <div class="form-group" [ngClass]="{ 'has-error': createPlaceForm.get('bodyText').touched && createPlaceForm.get('bodyText').invalid}">
+            <div class="form-group" [ngClass]="{ 'has-error': isInvalid('bodyText')}">
                 <label for="textArea" class="col-lg-2 control-label">Описание</label>
                 <div class="col-lg-10">
                     <textarea class="form-control" rows="3" id="textArea" placeholder="Описание" formControlName="bodyText"></textarea>
-                    <span class="text-danger" *ngIf="createPlaceForm.get('bodyText').touched && createPlaceForm.get('bodyText').errors?.required">Моля, въведете описание!</span>
-                    <span class="text-danger" *ngIf="createPlaceForm.get('bodyText').touched && createPlaceForm.get('bodyText').errors?.minlength">Описанието трябва да е поне 100 символа!</span>
+                    <span class="text-danger" *ngIf="hasError('bodyText', 'required')">Моля, въведете описание!</span>
+                    <span class="text-danger" *ngIf="hasError('bodyText', 'minlength')">Описанието трябва да е поне {{ bodyTextMinLength }} символа!</span>
                 </div>
             </div>
             <div class="form-group">
@@ -24,39 +23,36 @@
                 <div class="col-lg-10">
                     <select class="form-control" id="selectCategory" formControlName="category" placeholder="Избери категория">
                         <option value="" disabled selected>Избери категория</option>
-                        <option *ngFor="let category of categories | async" value="{{ category.name }}">{{ category.name }}</option>
+                        <option *ngFor="let category of categories|async" value="{{ category.name }}">{{ category.name }}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group" formGroupName="location">
                 <label class="col-lg-2 control-label">GPS координати</label>
                 <div class="col-lg-5">
-                    <input class="form-control" placeholder="Ширина" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-                        type="text" formControlName="latitude">
+                    <input class="form-control" placeholder="Ширина" type="text" formControlName="latitude">
                 </div>
                 <div class="col-lg-5">
-                    <input class="form-control" placeholder="Дължина" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-                        type="text" formControlName="longitude">
+                    <input class="form-control" placeholder="Дължина" type="text" formControlName="longitude">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputImage" class="col-lg-2 control-label">Снимка</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="inputImage" placeholder="Избери снимка" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;"
-                        type="file" (change)="detectFiles($event)">
+                    <input class="form-control" id="inputImage" placeholder="Избери снимка" type="file" (change)="onDetectFiles($event.target.files)">
                     <div *ngIf="currentUpload">
                         <div class="progress">
-                            <div class="progress-bar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                            <div class="progress-bar" [style.width.%]="currentUpload?.progress"></div>
                         </div>
                         {{ currentUpload?.progress | number:'1.0-2' }}% завършени
                     </div>
-                    <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="uploadPicture()">Качи снимка</button>
+                    <button class="btn btn-primary btn-sm" [disabled]="!selectedFiles" (click)="onUploadPicture()">Качи снимка</button>
                 </div>
             </div>
             <div class="form-group margin-top-80">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button type="reset" class="btn btn-default" (click)="resetForm()">Отмени</button>
-                    <button type="submit" class="btn btn-primary">Създай</button>
+                    <button type="reset" class="btn btn-default col-sm-3 col-xs-5" (click)="onResetForm()">Отмени</button>
+                    <button type="button" class="btn btn-primary col-sm-3 col-xs-5" (click)="onSavePlace(createPlaceForm.value)">Създай</button>
                 </div>
             </div>
         </section>

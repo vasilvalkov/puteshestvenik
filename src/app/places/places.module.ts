@@ -8,6 +8,7 @@ import { PlacesComponent } from './places.component';
 import { PlacesRoutingModule } from './places-routing.module';
 import { PlaceDetailsComponent } from './place-details/place-details.component';
 import { PlaceEditComponent } from './place-edit/place-edit.component';
+import { PlaceInfoPanelComponent } from './place-info-panel/place-info-panel.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { PlaceEditComponent } from './place-edit/place-edit.component';
         PlacesComponent,
         PlaceDetailsComponent,
         PlaceEditComponent,
-        CommentComponent
+        CommentComponent,
+        PlaceInfoPanelComponent
     ],
     exports: [
         PlacesComponent,

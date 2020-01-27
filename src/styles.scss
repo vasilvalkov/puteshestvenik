@@ -1,4 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@mixin overflow-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .margin-top-40 {
     margin-top: 40px;
 }

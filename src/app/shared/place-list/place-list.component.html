@@ -1,0 +1,5 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-md-3" *ngFor="let place of places">
+      <app-place-thumbnail [heading]="place.heading" [imageUrl]="place.thumbUrl" [routerLink]="[placeUrl, place.id]"></app-place-thumbnail>
+  </div>
+</div>

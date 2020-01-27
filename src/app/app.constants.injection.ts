@@ -1,20 +1,30 @@
+import { UserWithCredential } from './user/user.model';
 import { InjectionToken } from '@angular/core';
 
 export const AppConstantInjectionToken = new InjectionToken('app-config');
-export const DecimalPlacesInjectionToken = new InjectionToken('app-decimal-places');
-export const DashboardViewDecimalPlacesInjectionToken = new InjectionToken('app-dashboard-view-decimal-places');
-export const ButtonNamesInjectionToken = new InjectionToken('app-button-names');
 
 export interface AppConstants {
     routes: {
         LOGIN: string;
         REGISTER: string;
         PLACES: string;
+        PLACE_CREATE: string;
         USER: string;
+        PROFILE: string;
     };
-    apiEndpoints: {
-        [key: string]: string | any;
+    storageRefs: {
+        PLACES: string;
+        USERS: string;
+        CATEGORIES: string;
+        [key: string]: string;
     };
+    validation: {
+        [key: string]: any;
+    };
+    default: {
+        DATE_FORMAT: string;
+        USER_WITH_CREDENTIAL: UserWithCredential
+    }
 }
 
 

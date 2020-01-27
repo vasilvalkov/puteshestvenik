@@ -7,8 +7,8 @@ import { PlaceEditComponent } from './place-edit/place-edit.component';
 
 
 const placeRoutes: Routes = [
-    { path: ':id', component: PlaceDetailsComponent },
     { path: 'create', component: PlaceEditComponent },
+    { path: ':id', component: PlaceDetailsComponent },
     { path: '', component: PlacesComponent },
 ];
 

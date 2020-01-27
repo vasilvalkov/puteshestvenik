@@ -1,0 +1,24 @@
+<div class="form-group">
+  <input class="form-control" #query placeholder="Намери дестинация" type="text">
+</div>
+<a type="button" class="btn btn-default" (click)="search(query.value)" data-target="#modal">Търси</a>
+
+<div class="modal" id="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Резултати за: {{ query.value }} </h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a (click)="closeModal(result.id)" class="list-group-item" *ngFor="let result of foundPlaces">
+            <h4 class="list-group-item-heading">{{ result.heading }}</h4>
+            <p class="list-group-item-text">{{ result.bodyText }}</p>
+          </a>
+          <p class="list-group-item-text" *ngIf="!foundPlaces.length">Няма намерени резултати!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

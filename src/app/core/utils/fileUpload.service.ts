@@ -1,5 +1,6 @@
+import { AppConstantInjectionToken, AppConstants } from './../../app.constants.injection';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import * as firebase from 'firebase';
 
 import { Upload } from './upload';
@@ -8,10 +9,13 @@ import { Upload } from './upload';
 export class FileUploadService {
 
     uploads: any;
-    private basePath = '/places';
+    private basePath = this.app_constants.storageRefs.PLACES;
     private uploadTask: firebase.storage.UploadTask;
 
-    constructor(private db: AngularFireDatabase) { }
+    constructor(
+        private db: AngularFireDatabase,
+        @Inject(AppConstantInjectionToken) private app_constants: AppConstants
+    ) { }
 
     pushUpload(upload: Upload) {
         const storageRef = firebase.storage().ref();

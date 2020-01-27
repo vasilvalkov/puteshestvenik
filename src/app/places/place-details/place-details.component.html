@@ -1,17 +1,5 @@
 <div class="row" *ngIf="place|async as plc">
-    <section class="col-sm-3">
-        <img class="img-responsive" src="{{ plc.thumbUrl }}" alt="{{ plc.heading }}">
-        <article class="panel panel-default">
-            <div class="panel-body">
-                <div>
-                    Оценка:
-                    <app-star-rating [rating]="plc.rating" [topRating]="5"></app-star-rating>
-                </div>
-                <div>Категория: {{ plc.category }}</div>
-                <div>GPS: <span *ngIf="plc.location">{{ plc.location.latitude }}, {{ plc.location.longitude }}</span></div>
-            </div>
-        </article>
-    </section>
+    <app-place-info-panel class="col-sm-3" [place]="plc"></app-place-info-panel>
     <section class="col-sm-6">
         <h3>{{ plc.heading }}</h3>
         <hr>
@@ -29,9 +17,14 @@
                 &markers=color:blue%7Clabel:S%7C{{plc.location.latitude}},{{plc.location.longitude}}&key=AIzaSyAWUxEBDtca3Y9X_rdnOONWQBbDblAekp8" alt="">
             </div>
             <div class="tab-pane fade" id="comments">
-                <p class="text-center" *ngIf="plc.comments?.length === 0 || !plc.comments">Все още няма коментари за това място.</p>
-                <app-comment *ngFor="let comment of plc.comments" [commentData]="comment"></app-comment>
+                <ng-container *ngIf="plc.comments?.length; else nocomments">
+                    <app-comment *ngFor="let comment of plc.comments" [commentData]="comment"></app-comment>
+                </ng-container>
             </div>
         </div>
     </section>
 </div>
+
+<ng-template #nocomments>
+    <p class="text-center">Все още няма коментари за това място.</p>
+</ng-template>
