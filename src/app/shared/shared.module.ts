@@ -6,6 +6,7 @@ import { PlaceThumbnailComponent } from './place-thumbnail/place-thumbnail.compo
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { PlaceListComponent } from './place-list/place-list.component';
 import { SearchPlacesComponent } from './search-places/search-places.component';
+import { LoginMenuComponent } from './login-menu/login-menu.component';
 
 
 @NgModule({
@@ -17,13 +18,15 @@ import { SearchPlacesComponent } from './search-places/search-places.component';
     PlaceThumbnailComponent,
     StarRatingComponent,
     PlaceListComponent,
-    SearchPlacesComponent
+    SearchPlacesComponent,
+    LoginMenuComponent
   ],
   exports: [
     PlaceThumbnailComponent,
     StarRatingComponent,
     PlaceListComponent,
-    SearchPlacesComponent
+    SearchPlacesComponent,
+    LoginMenuComponent
   ]
 })
 export class SharedModule { }

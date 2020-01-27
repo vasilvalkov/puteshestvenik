@@ -35,7 +35,7 @@ export const APP_CONSTANTS: AppConstants = {
       places: [],
       comments: [],
       // tslint:disable-next-line:max-line-length
-      photoUrl: 'https://firebasestorage.googleapis.com/v0/b/pateshestvenik-fab85.appspot.com/o/users%2Favatar.jpg?alt=media&token=cf2f6546-4b2f-4537-bd5d-3bb7d23a9039'
+      photoURL: 'https://firebasestorage.googleapis.com/v0/b/pateshestvenik-fab85.appspot.com/o/users%2Favatar.jpg?alt=media&token=cf2f6546-4b2f-4537-bd5d-3bb7d23a9039'
   }
   }
 };

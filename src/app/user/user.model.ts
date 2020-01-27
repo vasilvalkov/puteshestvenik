@@ -6,7 +6,7 @@ export interface User {
     lastName: string;
     places: Place[];
     comments: Comment[];
-    photoUrl: string;
+    photoURL: string;
     email: string;
 }
 

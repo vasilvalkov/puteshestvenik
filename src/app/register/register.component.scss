@@ -1,1 +1,7 @@
+.action-btn {
+  margin: 1em 0;
 
+  &[type='reset'] {
+    margin-right: 1em;
+  }
+}

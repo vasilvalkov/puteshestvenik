@@ -4,7 +4,7 @@
         <section class="col-sm-11">
             <div class="form-group" [ngClass]="{ 'has-error': isInvalid('username')}">
                 <label for="inputUsername" class="col-lg-2 control-label">Потребителско име</label>
-                <div class="col-lg-5">
+                <div class="col-lg-10">
                     <input class="form-control" id="inputUsername" placeholder="Потребителско име" type="text" formControlName="username">
                     <span class="text-danger" *ngIf="hasError('username', 'required')">Моля, въведете потребитско име!</span>
                     <span class="text-danger" *ngIf="hasError('username', 'minlength')">Потребителското име трябва да е поне {{usernameMinLength}} символа!</span>
@@ -13,7 +13,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': isInvalid('firstName')}">
                 <label for="inputFirstName" class="col-lg-2 control-label">Име</label>
-                <div class="col-lg-5">
+                <div class="col-lg-10">
                     <input class="form-control" id="inputFirstName" placeholder="Име" type="text" formControlName="firstName">
                     <span class="text-danger" *ngIf="hasError('firstName', 'required')">Моля, въведете Вашето име!</span>
                     <span class="text-danger" *ngIf="hasError('firstName', 'minlength')">Името трябва да е поне {{nameMinLength}} символа!</span>
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': isInvalid('lastName')}">
                 <label for="inputLastName" class="col-lg-2 control-label">Фамилия</label>
-                <div class="col-lg-5">
+                <div class="col-lg-10">
                     <input class="form-control" id="inputLastName" placeholder="Фамилия" type="text" formControlName="lastName">
                     <span class="text-danger" *ngIf="hasError('lastName', 'required')">Моля, въведете Вашата фамилия!</span>
                     <span class="text-danger" *ngIf="hasError('lastName', 'minlength')">Фамилията трябва да е поне {{nameMinLength}} символа!</span>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': isInvalid('email')}">
                 <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-                <div class="col-lg-5">
+                <div class="col-lg-10">
                     <input type="text" formControlName="email" class="form-control" id="inputEmail" placeholder="Email">
                     <span class="text-danger" *ngIf="hasError('email', 'required')">Моля, въведете email!</span>
                     <span class="text-danger" *ngIf="hasError('email', 'pattern')">Невалиден e-mail!</span>
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': isInvalid('password')}">
                 <label for="inputPassword" class="col-lg-2 control-label">Парола</label>
-                <div class="col-lg-5">
+                <div class="col-lg-10">
                     <input class="form-control" id="inputPassword" placeholder="Парола" type="password" formControlName="password">
                     <span class="text-danger" *ngIf="hasError('password', 'required')">Моля, въведете парола!</span>
                     <span class="text-danger" *ngIf="hasError('password', 'minlength')">Паролата трябва да е поне {{passwordMinLength}} символа!</span>
@@ -47,9 +47,9 @@
             </div>
             <div class="form-group margin-top-40">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button type="reset" class="btn btn-danger" (click)="onCancelRegistration()">Отмени</button>
-                    <button type="reset" class="btn btn-default" (click)="onResetForm()">Започни отначало</button>
-                    <button style="float: right" type="button" class="btn btn-primary" (click)="onRegister(registerForm.value)">Създай профил</button>
+                    <button type="reset" class="action-btn btn btn-danger col-xs-12 col-sm-2" (click)="onCancelRegistration()">Отмени</button>
+                    <button type="reset" class="action-btn btn btn-default col-xs-12 col-sm-3" (click)="onResetForm()">Започни отначало</button>
+                    <button type="button" class="action-btn btn btn-primary pull-right col-xs-12 col-sm-3" (click)="onRegister(registerForm.value)">Създай профил</button>
                 </div>
             </div>
         </section>

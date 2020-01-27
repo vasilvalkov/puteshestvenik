@@ -24,7 +24,7 @@ export interface AppConstants {
     default: {
         DATE_FORMAT: string;
         USER_WITH_CREDENTIAL: UserWithCredential
-    }
+    };
 }
 
 

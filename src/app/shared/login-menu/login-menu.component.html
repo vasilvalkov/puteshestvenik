@@ -1,0 +1,9 @@
+<ng-container *ngIf="currentUser|async as usr; else nouser">
+  <li><a [routerLink]="[userProfileRoute]">Здравей, {{ usr.displayName }}</a></li>
+  <li><a href="" (click)="logout()">Изход</a></li>
+</ng-container>
+
+<ng-template #nouser>
+  <li routerLinkActive="active"><a [routerLink]="[loginRoute]">Вход</a></li>
+  <li routerLinkActive="active"><a [routerLink]="[registerRoute]">Регистрация</a></li>
+</ng-template>

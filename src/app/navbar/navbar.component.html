@@ -19,21 +19,8 @@
                     <a [routerLink]="[placesRoute]">Дестинации</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <ng-container *ngIf="currentUser|async as usr; else nouser">
-                    <li><a [routerLink]="[userProfileRoute]">Здравей, {{ usr.displayName }}</a></li>
-                    <li><a href="" (click)="logout()">Изход</a></li>
-                </ng-container>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <app-search-places></app-search-places>
-            </form>
+            <app-login-menu class="nav navbar-nav navbar-right"></app-login-menu>
+            <app-search-places class="navbar-form navbar-right"></app-search-places>
         </div>
     </div>
 </nav>
-
-
-<ng-template #nouser>
-    <li routerLinkActive="active"><a [routerLink]="['/login']">Вход</a></li>
-    <li routerLinkActive="active"><a [routerLink]="['/register']">Регистрация</a></li>
-</ng-template>
